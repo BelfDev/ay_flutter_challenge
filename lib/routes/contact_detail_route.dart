@@ -1,7 +1,9 @@
 import 'package:ay_flutter_challenge/configs/configs.dart';
 import 'package:flutter/material.dart';
 
-class ContactDetail extends StatelessWidget {
+/// A [StatelessWidget] which encapsulates the contents of the
+/// of the Contact Detail screen.
+class ContactDetailRoute extends StatelessWidget {
   static const String id = '/contact-detail';
 
   @override

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'contact_detail_route.dart';
 
+/// A [StatelessWidget] which encapsulates the contents of the
+/// of the Contact List screen.
 class ContactListRoute extends StatelessWidget {
   static const String id = '/contact-list';
 
@@ -21,7 +23,7 @@ class ContactListRoute extends StatelessWidget {
               ),
               RaisedButton(
                 onPressed: () =>
-                    Navigator.of(context).pushNamed(ContactDetail.id),
+                    Navigator.of(context).pushNamed(ContactDetailRoute.id),
                 child: Text('Touch Me!'),
               )
             ],
