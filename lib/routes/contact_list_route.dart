@@ -1,7 +1,6 @@
-import 'package:ay_flutter_challenge/configs/configs.dart';
+import 'package:ay_flutter_challenge/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-
-import 'contact_detail_route.dart';
+import 'package:flutter/services.dart';
 
 /// A [StatelessWidget] which encapsulates the contents of the
 /// of the Contact List screen.
@@ -10,26 +9,21 @@ class ContactListRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = AppTheme.of(context);
     return Scaffold(
-      body: Container(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Home Route',
-                style: theme.textTheme.headline1,
-              ),
-              RaisedButton(
-                onPressed: () =>
-                    Navigator.of(context).pushNamed(ContactDetailRoute.id),
-                child: Text('Touch Me!'),
+        body: AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light,
+      child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverOverlapAbsorber(
+                handle:
+                    NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+                sliver: FlexibleSliverAppBar(
+                    title: 'Contacts', innerBoxIsScrolled: innerBoxIsScrolled),
               )
-            ],
-          ),
-        ),
-      ),
-    );
+            ];
+          },
+          body: GroupedListView()),
+    ));
   }
 }
