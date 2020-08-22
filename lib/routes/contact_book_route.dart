@@ -1,3 +1,4 @@
+import 'package:ay_flutter_challenge/mock_data.dart';
 import 'package:ay_flutter_challenge/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,23 +8,45 @@ import 'package:flutter/services.dart';
 class ContactBookRoute extends StatelessWidget {
   static const String id = '/contact-book';
 
+  final sectionList = MockData.getExampleSections();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.light,
-      child: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              SliverOverlapAbsorber(
-                handle:
-                    NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-                sliver: FlexibleSliverAppBar(
-                    title: 'Contacts', innerBoxIsScrolled: innerBoxIsScrolled),
-              )
-            ];
-          },
-          body: GroupedListView()),
-    ));
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.light,
+        child: Scaffold(
+            body: GroupedListView<ExampleSection, String>(
+          sliverAppBar: FlexibleSliverAppBar(
+            title: 'Contacts',
+          ),
+          sectionList: sectionList,
+          sectionBuilder: _buildSection,
+          itemBuilder: _buildItem,
+        )));
+  }
+
+  Widget _buildItem(context, sectionIndex, itemIndex, index) {
+    String item = sectionList[sectionIndex].items[itemIndex];
+    return ListTile(
+      leading: CircleAvatar(
+        child: Text("$index"),
+      ),
+      title: Text(item),
+    );
+  }
+
+  Widget _buildSection(BuildContext context, int sectionIndex, int index) {
+    ExampleSection section = sectionList[sectionIndex];
+    return InkWell(
+      child: Container(
+          color: Colors.lightBlue,
+          height: 48,
+          padding: EdgeInsets.only(left: 20),
+          alignment: Alignment.centerLeft,
+          child: Text(
+            section.header,
+            style: TextStyle(color: Colors.white),
+          )),
+    );
   }
 }
