@@ -1,12 +1,12 @@
 import 'package:ay_flutter_challenge/configs/app_config.dart';
+import 'package:ay_flutter_challenge/routes/contact_book_route.dart';
 import 'package:ay_flutter_challenge/routes/contact_detail_route.dart';
-import 'package:ay_flutter_challenge/routes/contact_list_route.dart';
 import 'package:flutter/material.dart';
 
 /// A class that registers and generates App [Route]s
 class RouteProvider {
   static final Map<String, WidgetBuilder> _routes = {
-    ContactListRoute.id: (context) => ContactListRoute(),
+    ContactBookRoute.id: (context) => ContactBookRoute(),
     ContactDetailRoute.id: (context) => ContactDetailRoute(),
   };
 

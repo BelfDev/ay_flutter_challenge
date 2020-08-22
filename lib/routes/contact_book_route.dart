@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 /// A [StatelessWidget] which encapsulates the contents of the
-/// of the Contact List screen.
-class ContactListRoute extends StatelessWidget {
-  static const String id = '/contact-list';
+/// of the Contact Book screen.
+class ContactBookRoute extends StatelessWidget {
+  static const String id = '/contact-book';
 
   @override
   Widget build(BuildContext context) {
