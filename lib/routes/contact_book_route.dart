@@ -1,4 +1,5 @@
 import 'package:ay_flutter_challenge/mock_data.dart';
+import 'package:ay_flutter_challenge/routes/contact_detail_route.dart';
 import 'package:ay_flutter_challenge/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -32,6 +33,8 @@ class ContactBookRoute extends StatelessWidget {
         child: Text("$index"),
       ),
       title: Text(item),
+      onTap: () => Navigator.of(context)
+          .pushNamed(ContactDetailRoute.id, arguments: {'title': item}),
     );
   }
 

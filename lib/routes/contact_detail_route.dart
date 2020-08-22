@@ -12,6 +12,9 @@ class ContactDetailRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dynamic args = ModalRoute.of(context).settings.arguments;
+    final String title = args['title'];
+
     final theme = AppTheme.of(context);
     return Scaffold(
       body: SafeArea(
@@ -27,7 +30,7 @@ class ContactDetailRoute extends StatelessWidget {
                     shrinkWrap: true,
                     itemBuilder: (context, index) => Center(
                           child: Text(
-                            contacts[index].fullName,
+                            title,
                             style: theme.textTheme.headline1,
                           ),
                         ));
