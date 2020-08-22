@@ -1,51 +1,52 @@
-import 'package:ay_flutter_challenge/configs/configs.dart';
-import 'package:ay_flutter_challenge/data/models/models.dart';
-import 'package:ay_flutter_challenge/data/repositories/contact_repository.dart';
+import 'package:ay_flutter_challenge/mock_data.dart';
 import 'package:flutter/material.dart';
+import 'package:sticky_and_expandable_list/sticky_and_expandable_list.dart';
 
-class GroupedListView extends StatelessWidget {
-  final repo = ContactRepository();
+typedef GroupedListSectionBuilder = Widget Function(
+    BuildContext context, int sectionIndex, int index);
+typedef GroupedListItemBuilder = Widget Function(
+    BuildContext context, int sectionIndex, int itemIndex, int index);
+
+// [x] Make this widget generic
+/// A [CustomScrollView] that builds list items grouped by sections.
+/// S is the type of the section and T is the type of its inner items.
+class GroupedListView<S extends ExpandableListSection<T>, T>
+    extends StatelessWidget {
+  final Widget sliverAppBar;
+
+  // [x] We expect a GroupedListView widget which receives the items
+  final List<ExampleSection> sectionList;
+
+  // [x] and be able to work with any data type, given the appropriate builder is provided
+  final GroupedListItemBuilder itemBuilder;
+  final GroupedListSectionBuilder sectionBuilder;
+
+  const GroupedListView(
+      {Key key,
+      this.sliverAppBar,
+      @required this.sectionList,
+      @required this.itemBuilder,
+      @required this.sectionBuilder})
+      : super(key: key);
+
+  bool get _hasSliverAppBar => sliverAppBar != null;
 
   @override
   Widget build(BuildContext context) {
-    final theme = AppTheme.of(context);
     return CustomScrollView(
       slivers: <Widget>[
-        SliverOverlapInjector(
-            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context)),
-        FutureBuilder<List<Contact>>(
-            future: repo.fetchContacts(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                final contacts = snapshot.data;
-                return _buildContactList(contacts, theme);
-              } else if (snapshot.hasError) {
-                return SliverToBoxAdapter(
-                    child: Text('Something went wrong!',
-                        style: theme.textTheme.headline1));
-              } else {
-                return SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 100,
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              }
-            }), //          SliverPersistentHeader(delegate: MyCustomDelegate())
+        if (_hasSliverAppBar) sliverAppBar,
+        _buildContactList(),
       ],
     );
   }
 
-  Widget _buildContactList(List<Contact> contacts, ThemeData theme) {
-    return SliverFixedExtentList(
-      itemExtent: 56.0,
-      delegate: SliverChildBuilderDelegate((context, index) {
-        return ListTile(
-            title: Text(
-          '${contacts[index].fullName}',
-          style: theme.textTheme.headline1,
-        ));
-      }, childCount: contacts.length),
+  Widget _buildContactList() {
+    return SliverExpandableList(
+      builder: SliverExpandableChildDelegate<T, S>(
+          sectionList: sectionList,
+          headerBuilder: sectionBuilder,
+          itemBuilder: itemBuilder),
     );
   }
 }
