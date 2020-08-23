@@ -3,6 +3,7 @@
 class LocalDataSource {
   LocalDataSource._();
 
+  // TODO: Treat strange names, ponctuations, long names, null, and empty value.
   /// Returns a cached list of dummy contacts
   static const List<String> contacts = [
     'Adi Shamir',
