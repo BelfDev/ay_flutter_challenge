@@ -43,6 +43,10 @@ class ContactBook {
   /// Returns a [List] of [Sections] containing [Contact] elements.
   List<Section<Contact>> get sections => _sections;
 
+  /// Returns a [List] of all [Contact] values.
+  List<Contact> get contacts => _sectionMap.values.fold(List<Contact>(),
+      (previousValue, element) => previousValue + element.items);
+
   @override
   String toString() {
     return _sectionMap.entries.map((e) => "${e.key} => ${e.value}").join("\n");
