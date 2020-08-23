@@ -27,45 +27,50 @@ class ContactBookRoute extends StatelessWidget {
     ));
   }
 
-  // TODO: Take the AppBar out of the future.
+  // TODO: Take the AppBar out of the future and treat loading state.
   Widget _buildGroupedListView(
       BuildContext context, AsyncSnapshot<ContactBook> snapshot) {
     final sectionList = snapshot.data.sections;
     final styles = Styles.of(context);
 
     return GroupedListView<Section<Contact>, Contact>(
-      sliverAppBar: FlexibleSliverAppBar(
-        title: 'Contacts',
-      ),
-      header: Container(
-        alignment: Alignment.center,
-        height: 64,
-        child: Text('Pedro Belfort\n= Made in Brazil =',
-            textAlign: TextAlign.center, style: styles.texts.sectionTile),
-      ),
-      sectionList: sectionList,
-      sectionBuilder: (context, sectionIndex, _) {
-        final section = sectionList[sectionIndex];
-        return GroupedListSectionTile(
-          title: section.title,
-        );
-      },
-      itemBuilder: (context, sectionIndex, itemIndex, int index) {
-        final contact = sectionList[sectionIndex].items[itemIndex];
-        return GroupedListItemTile(
-          title: contact.fullName,
-          onTap: () => Navigator.of(context).pushNamed(ContactDetailRoute.id,
-              arguments: {'title': contact.fullName}),
-        );
-      },
-      footer: Column(
-          children: List.generate(
-        4,
-        (index) => RaisedButton(
-          onPressed: () {},
-          child: Text('Disabled Button', style: TextStyle(fontSize: 20)),
+        sliverAppBar: FlexibleSliverAppBar(
+          title: 'Contacts',
         ),
-      )),
-    );
+        header: SliverToBoxAdapter(
+          child: Container(
+            alignment: Alignment.center,
+            height: 64,
+            child: Text('Pedro Belfort\n= Made in Brazil =',
+                textAlign: TextAlign.center, style: styles.texts.sectionTile),
+          ),
+        ),
+        sectionList: sectionList,
+        sectionBuilder: (context, sectionIndex, _) {
+          final section = sectionList[sectionIndex];
+          return GroupedListSectionTile(
+            title: section.title,
+          );
+        },
+        itemBuilder: (context, sectionIndex, itemIndex, int index) {
+          final contact = sectionList[sectionIndex].items[itemIndex];
+          return GroupedListItemTile(
+            title: contact.fullName,
+            onTap: () => Navigator.of(context).pushNamed(ContactDetailRoute.id,
+                arguments: {'title': contact.fullName}),
+          );
+        },
+        footer: SliverFixedExtentList(
+          itemExtent: 50.0,
+          delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+              return Container(
+                alignment: Alignment.center,
+                color: Colors.lightBlue[100 * (index % 9)],
+                child: Text('list item $index'),
+              );
+            },
+          ),
+        ));
   }
 }

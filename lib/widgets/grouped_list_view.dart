@@ -44,15 +44,9 @@ class GroupedListView<S extends ExpandableListSection<T>, T>
     return CustomScrollView(
       slivers: <Widget>[
         if (_hasSliverAppBar) sliverAppBar,
-        if (_hasHeader)
-          SliverToBoxAdapter(
-            child: header,
-          ),
+        if (_hasHeader) header,
         _buildGroupedList(context),
-        if (_hasFooter)
-          SliverToBoxAdapter(
-            child: footer,
-          ),
+        if (_hasFooter) footer,
       ],
     );
   }
