@@ -8,7 +8,10 @@ typedef GroupedListItemBuilder = Widget Function(
     BuildContext context, int sectionIndex, int itemIndex, int index);
 
 /// A [CustomScrollView] that builds list items grouped by sections.
-/// S is the type of the section and T is the type of its inner items.
+/// S is the type of the section and T is the type of its items.
+/// Supports optional [SliverAppBar], and box [header] or [footer].
+/// The [header] is drawn before the list. Conversely, the [footer]
+/// is laid out below the list.
 class GroupedListView<S extends ExpandableListSection<T>, T>
     extends StatelessWidget {
   const GroupedListView({
@@ -17,21 +20,39 @@ class GroupedListView<S extends ExpandableListSection<T>, T>
     @required this.itemBuilder,
     @required this.sectionBuilder,
     this.sliverAppBar,
-  }) : super(key: key);
+    this.header,
+    this.footer,
+  })  : assert(sectionList != null),
+        assert(itemBuilder != null),
+        super(key: key);
 
   final Widget sliverAppBar;
   final List<S> sectionList;
   final GroupedListItemBuilder itemBuilder;
   final GroupedListSectionBuilder sectionBuilder;
+  final Widget header;
+  final Widget footer;
 
   bool get _hasSliverAppBar => sliverAppBar != null;
+
+  bool get _hasHeader => header != null;
+
+  bool get _hasFooter => footer != null;
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: <Widget>[
         if (_hasSliverAppBar) sliverAppBar,
+        if (_hasHeader)
+          SliverToBoxAdapter(
+            child: header,
+          ),
         _buildGroupedList(context),
+        if (_hasFooter)
+          SliverToBoxAdapter(
+            child: footer,
+          ),
       ],
     );
   }

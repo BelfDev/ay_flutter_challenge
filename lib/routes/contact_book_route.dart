@@ -3,6 +3,7 @@ import 'package:ay_flutter_challenge/data/models/contact_book.dart';
 import 'package:ay_flutter_challenge/data/models/models.dart';
 import 'package:ay_flutter_challenge/data/repositories/contact_repository.dart';
 import 'package:ay_flutter_challenge/routes/contact_detail_route.dart';
+import 'package:ay_flutter_challenge/utils/styles.dart';
 import 'package:ay_flutter_challenge/widgets/tiles/grouped_list_item_tile.dart';
 import 'package:ay_flutter_challenge/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +18,12 @@ class ContactBookRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: FutureBuilder<ContactBook>(
-      future: repo.fetchContacts(),
-      builder: _buildGroupedListView,
+        body: SafeArea(
+      top: false,
+      child: FutureBuilder<ContactBook>(
+        future: repo.fetchContacts(),
+        builder: _buildGroupedListView,
+      ),
     ));
   }
 
@@ -27,10 +31,17 @@ class ContactBookRoute extends StatelessWidget {
   Widget _buildGroupedListView(
       BuildContext context, AsyncSnapshot<ContactBook> snapshot) {
     final sectionList = snapshot.data.sections;
+    final styles = Styles.of(context);
 
     return GroupedListView<Section<Contact>, Contact>(
       sliverAppBar: FlexibleSliverAppBar(
         title: 'Contacts',
+      ),
+      header: Container(
+        alignment: Alignment.center,
+        height: 64,
+        child: Text('Pedro Belfort\n= Made in Brazil =',
+            textAlign: TextAlign.center, style: styles.texts.sectionTile),
       ),
       sectionList: sectionList,
       sectionBuilder: (context, sectionIndex, _) {
@@ -47,6 +58,14 @@ class ContactBookRoute extends StatelessWidget {
               arguments: {'title': contact.fullName}),
         );
       },
+      footer: Column(
+          children: List.generate(
+        4,
+        (index) => RaisedButton(
+          onPressed: () {},
+          child: Text('Disabled Button', style: TextStyle(fontSize: 20)),
+        ),
+      )),
     );
   }
 }
