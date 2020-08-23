@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 
 import 'gradient_filter.dart';
 
-/// Custom [SliverAppBar] that expands and contracts according to the
+/// Customized [SliverAppBar] that expands and contracts according to the
 /// scroll position. By default, the bar initiates fully expanded and
 /// shrinks upon scrolling.
 class FlexibleSliverAppBar extends StatelessWidget {

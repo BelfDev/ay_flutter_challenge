@@ -1,4 +1,5 @@
 import 'package:ay_flutter_challenge/mock_data.dart';
+import 'package:ay_flutter_challenge/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:sticky_and_expandable_list/sticky_and_expandable_list.dart';
 
@@ -7,27 +8,22 @@ typedef GroupedListSectionBuilder = Widget Function(
 typedef GroupedListItemBuilder = Widget Function(
     BuildContext context, int sectionIndex, int itemIndex, int index);
 
-// [x] Make this widget generic
 /// A [CustomScrollView] that builds list items grouped by sections.
 /// S is the type of the section and T is the type of its inner items.
 class GroupedListView<S extends ExpandableListSection<T>, T>
     extends StatelessWidget {
+  const GroupedListView({
+    Key key,
+    @required this.sectionList,
+    @required this.itemBuilder,
+    @required this.sectionBuilder,
+    this.sliverAppBar,
+  }) : super(key: key);
+
   final Widget sliverAppBar;
-
-  // [x] We expect a GroupedListView widget which receives the items
   final List<ExampleSection> sectionList;
-
-  // [x] and be able to work with any data type, given the appropriate builder is provided
   final GroupedListItemBuilder itemBuilder;
   final GroupedListSectionBuilder sectionBuilder;
-
-  const GroupedListView(
-      {Key key,
-      this.sliverAppBar,
-      @required this.sectionList,
-      @required this.itemBuilder,
-      @required this.sectionBuilder})
-      : super(key: key);
 
   bool get _hasSliverAppBar => sliverAppBar != null;
 
@@ -36,17 +32,29 @@ class GroupedListView<S extends ExpandableListSection<T>, T>
     return CustomScrollView(
       slivers: <Widget>[
         if (_hasSliverAppBar) sliverAppBar,
-        _buildContactList(),
+        _buildGroupedList(context),
       ],
     );
   }
 
-  Widget _buildContactList() {
+  Widget _buildGroupedList(BuildContext context) {
+    final styles = Styles.of(context);
     return SliverExpandableList(
       builder: SliverExpandableChildDelegate<T, S>(
           sectionList: sectionList,
           headerBuilder: sectionBuilder,
-          itemBuilder: itemBuilder),
+          itemBuilder: itemBuilder,
+          separatorBuilder:
+              (BuildContext context, bool isSectionSeparator, int index) {
+            return Divider(
+              color:
+                  isSectionSeparator ? Colors.transparent : styles.dividerColor,
+              height: 0,
+              thickness: 1,
+              indent: 16,
+              endIndent: 8,
+            );
+          }),
     );
   }
 }

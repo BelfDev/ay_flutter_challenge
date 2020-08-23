@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// A customized [DecorationBox] that applies an gradient overlay.
+/// Customized [DecorationBox] that applies an gradient overlay.
 /// This widget is often used in conjunction with a [Stack] containing
 /// some type of [Image].
 class GradientFilter extends StatelessWidget {
