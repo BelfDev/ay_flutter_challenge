@@ -1,4 +1,3 @@
-import 'package:ay_flutter_challenge/mock_data.dart';
 import 'package:ay_flutter_challenge/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:sticky_and_expandable_list/sticky_and_expandable_list.dart';
@@ -21,7 +20,7 @@ class GroupedListView<S extends ExpandableListSection<T>, T>
   }) : super(key: key);
 
   final Widget sliverAppBar;
-  final List<ExampleSection> sectionList;
+  final List<S> sectionList;
   final GroupedListItemBuilder itemBuilder;
   final GroupedListSectionBuilder sectionBuilder;
 

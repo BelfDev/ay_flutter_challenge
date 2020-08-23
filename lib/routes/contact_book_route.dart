@@ -1,4 +1,7 @@
-import 'package:ay_flutter_challenge/mock_data.dart';
+import 'package:ay_flutter_challenge/data/models/contact.dart';
+import 'package:ay_flutter_challenge/data/models/contact_book.dart';
+import 'package:ay_flutter_challenge/data/models/models.dart';
+import 'package:ay_flutter_challenge/data/repositories/contact_repository.dart';
 import 'package:ay_flutter_challenge/routes/contact_detail_route.dart';
 import 'package:ay_flutter_challenge/widgets/tiles/grouped_list_item_tile.dart';
 import 'package:ay_flutter_challenge/widgets/widgets.dart';
@@ -10,38 +13,43 @@ import 'package:flutter/services.dart';
 class ContactBookRoute extends StatelessWidget {
   static const String id = '/contact-book';
 
-  // TODO: Replace with challenge data
-  final sectionList = MockData.getExampleSections();
+  final repo = ContactRepository();
 
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.dark,
         child: Scaffold(
-            body: GroupedListView<ExampleSection, String>(
-          sliverAppBar: FlexibleSliverAppBar(
-            title: 'Contacts',
-          ),
-          sectionList: sectionList,
-          sectionBuilder: _buildSection,
-          itemBuilder: _buildItem,
+            body: FutureBuilder<ContactBook>(
+          future: repo.fetchContacts(),
+          builder: _buildGroupedListView,
         )));
   }
 
-  Widget _buildItem(
-      BuildContext context, int sectionIndex, itemIndex, int index) {
-    String item = sectionList[sectionIndex].items[itemIndex];
-    return GroupedListItemTile(
-      title: item,
-      onTap: () => Navigator.of(context)
-          .pushNamed(ContactDetailRoute.id, arguments: {'title': item}),
-    );
-  }
+  // TODO: Take the AppBar out of the future.
+  Widget _buildGroupedListView(
+      BuildContext context, AsyncSnapshot<ContactBook> snapshot) {
+    final sectionList = snapshot.data.sections;
 
-  Widget _buildSection(BuildContext context, int sectionIndex, int index) {
-    ExampleSection section = sectionList[sectionIndex];
-    return GroupedListSectionTile(
-      title: section.header,
+    return GroupedListView<Section<Contact>, Contact>(
+      sliverAppBar: FlexibleSliverAppBar(
+        title: 'Contacts',
+      ),
+      sectionList: sectionList,
+      sectionBuilder: (context, sectionIndex, _) {
+        final section = sectionList[sectionIndex];
+        return GroupedListSectionTile(
+          title: section.title,
+        );
+      },
+      itemBuilder: (context, sectionIndex, itemIndex, int index) {
+        final contact = sectionList[sectionIndex].items[itemIndex];
+        return GroupedListItemTile(
+          title: contact.fullName,
+          onTap: () => Navigator.of(context).pushNamed(ContactDetailRoute.id,
+              arguments: {'title': contact.fullName}),
+        );
+      },
     );
   }
 }

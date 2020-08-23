@@ -4,9 +4,12 @@ import 'package:sticky_and_expandable_list/sticky_and_expandable_list.dart';
 /// E corresponds to the type of the [List] [items] contained in the section.
 /// [items] cannot be null.
 class Section<E> implements ExpandableListSection<E> {
+  final String title;
   final List<E> items;
 
-  const Section({this.items}) : assert(items != null);
+  const Section({this.title, this.items})
+      : assert(title != null),
+        assert(items != null);
 
   /// Adds [item] to the end of this list,
   /// extending the length by one.
@@ -16,7 +19,7 @@ class Section<E> implements ExpandableListSection<E> {
   List<E> getItems() => items;
 
   @override
-  bool isSectionExpanded() => false;
+  bool isSectionExpanded() => true;
 
   @override
   void setSectionExpanded(bool expanded) => false;

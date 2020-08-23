@@ -28,7 +28,7 @@ class ContactBook {
 
         if (!_sectionMap.containsKey(sectionKey)) {
           final contacts = List<Contact>();
-          final section = Section<Contact>(items: contacts);
+          final section = Section<Contact>(title: sectionKey, items: contacts);
           _sectionMap[sectionKey] = section;
           _sections.add(section);
         }
