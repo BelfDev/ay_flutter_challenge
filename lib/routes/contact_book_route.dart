@@ -6,7 +6,6 @@ import 'package:ay_flutter_challenge/routes/contact_detail_route.dart';
 import 'package:ay_flutter_challenge/widgets/tiles/grouped_list_item_tile.dart';
 import 'package:ay_flutter_challenge/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 /// A [StatelessWidget] which encapsulates the contents of the
 /// of the Contact Book screen.
@@ -17,13 +16,11 @@ class ContactBookRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.dark,
-        child: Scaffold(
-            body: FutureBuilder<ContactBook>(
-          future: repo.fetchContacts(),
-          builder: _buildGroupedListView,
-        )));
+    return Scaffold(
+        body: FutureBuilder<ContactBook>(
+      future: repo.fetchContacts(),
+      builder: _buildGroupedListView,
+    ));
   }
 
   // TODO: Take the AppBar out of the future.
