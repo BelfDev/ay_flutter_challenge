@@ -9,8 +9,13 @@ import 'gradient_filter.dart';
 class FlexibleSliverAppBar extends StatelessWidget {
   final String title;
   final String imageSource;
+  final bool forceElevated;
 
-  const FlexibleSliverAppBar({Key key, @required this.title, this.imageSource})
+  const FlexibleSliverAppBar(
+      {Key key,
+      @required this.title,
+      this.imageSource,
+      this.forceElevated = false})
       : assert(title != null),
         super(key: key);
 
@@ -19,6 +24,7 @@ class FlexibleSliverAppBar extends StatelessWidget {
     return SliverAppBar(
       pinned: true,
       expandedHeight: 200.0,
+      forceElevated: forceElevated,
       flexibleSpace: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
         final collapsed = constraints.biggest.height <= kToolbarHeight * 2;

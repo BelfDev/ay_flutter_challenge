@@ -18,25 +18,49 @@ class ContactBookRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-      top: false,
-      child: FutureBuilder<ContactBook>(
+        body: NestedScrollView(
+      floatHeaderSlivers: false,
+      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        return <Widget>[
+          SliverOverlapAbsorber(
+            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+            sliver: FlexibleSliverAppBar(
+              title: 'Contacts',
+              forceElevated: innerBoxIsScrolled,
+            ),
+          ),
+        ];
+      },
+      body: FutureBuilder<ContactBook>(
         future: repo.fetchContacts(),
         builder: _buildGroupedListView,
       ),
     ));
   }
 
-  // TODO: Take the AppBar out of the future and treat loading state.
+  // TODO: Remove this after all experiments are concluded
+//  @override
+//  Widget build(BuildContext context) {
+//    return Scaffold(
+//        body: SafeArea(
+//      top: false,
+//      child: FutureBuilder<ContactBook>(
+//        future: repo.fetchContacts(),
+//        builder: _buildGroupedListView,
+//      ),
+//    ));
+//  }
+
   Widget _buildGroupedListView(
       BuildContext context, AsyncSnapshot<ContactBook> snapshot) {
     final sectionList = snapshot.data.sections;
     final styles = Styles.of(context);
 
     return GroupedListView<Section<Contact>, Contact>(
-        sliverAppBar: FlexibleSliverAppBar(
-          title: 'Contacts',
-        ),
+        nested: true,
+//        sliverAppBar: FlexibleSliverAppBar(
+//          title: 'Contacts',
+//        ),
         header: SliverToBoxAdapter(
           child: Container(
             alignment: Alignment.center,
