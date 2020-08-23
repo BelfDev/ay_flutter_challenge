@@ -1,38 +1,47 @@
 import 'dart:collection';
 
 import 'contact.dart';
+import 'section.dart';
 
-/// A hash-table based implementation of [Map]. This class uses a
-/// [LinkedHashMap] to store and manipulate a collection of [Contact]s.
-/// The order of insertion is preserved.
+/// A custom data structure that contains [Contact]s grouped by [Section]s.
 class ContactBook {
-  final _sectionMap = LinkedHashMap<String, List<Contact>>();
+  final _sectionMap = LinkedHashMap<String, Section<Contact>>();
+  final _sections = List<Section<Contact>>();
 
-  ContactBook._();
+  /// TODO: Treat parsing edge cases.
+  /// TODO: Treat edge case for weird initials.
+  /// Creates a [ContactBook] instance based on the given list of [String] entries.
+  /// Complexity: O(n) or O(n^2) for small lists
+  ContactBook.from(List<String> entries) {
+    final modifiableEntries = List.from(entries);
 
-  /// Creates a [ContactBook] instance based on the given list of [Contact]s.
-  ContactBook.from(List<Contact> contactEntries) {
-    contactEntries
+    modifiableEntries
       // Sorts the given contact entries
+      // Dual-Pivot Quicksort algorithm or Insertion Sort (small lists);
+      // O(n log(n)) or О(n^2);
       ..sort()
-      // Populates the _sectionMap by using a common first name initial as key
+      // Populates the sectionMap and section list by using a common first name initial as key
+      // O(n)
       ..forEach((entry) {
-        final sectionTitle = entry.firstNameInitial;
-        if (!_sectionMap.containsKey(sectionTitle)) {
-          _sectionMap[sectionTitle] = List<Contact>();
+        final Contact contact = Contact.fromFullName(fullName: entry);
+        final sectionKey = contact.firstNameInitial;
+
+        if (!_sectionMap.containsKey(sectionKey)) {
+          final contacts = List<Contact>();
+          final section = Section<Contact>(items: contacts);
+          _sectionMap[sectionKey] = section;
+          _sections.add(section);
         }
-        _sectionMap[sectionTitle].add(entry);
+        // Since the map value points to the same section as the list,
+        // we can add an item for both via the reference.
+        _sectionMap[sectionKey].addItem(contact);
       });
   }
 
-  /// Returns the total number of sections.
-  int get sectionCount => _sectionMap.keys.length;
+  ContactBook._();
 
-  /// Returns the total number of contacts.
-  int get contactCount => _sectionMap.values.length;
-
-  /// Returns a [Map] with section titles and corresponding list of contacts.
-  Map<String, List<Contact>> get sectionMap => _sectionMap;
+  /// Returns a [List] of [Sections] containing [Contact] elements.
+  List<Section<Contact>> get sections => _sections;
 
   @override
   String toString() {
