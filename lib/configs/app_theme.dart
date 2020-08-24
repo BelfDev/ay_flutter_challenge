@@ -15,9 +15,6 @@ class AppTheme {
       scaffoldBackgroundColor: ThemeColors.smoothWhite,
       appBarTheme: AppBarTheme(
         color: ThemeColors.grey,
-        iconTheme: IconThemeData(
-          color: ThemeColors.white,
-        ),
       ),
       textTheme: TextTheme(
         headline1: TextStyle(
