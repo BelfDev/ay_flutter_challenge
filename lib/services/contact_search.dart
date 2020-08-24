@@ -94,7 +94,7 @@ class ContactSearch extends SearchDelegate<Contact> {
                 ),
                 onTap: () {
                   final contact = contacts[index];
-                  _addToHistory(contact);
+                  bloc.addToContactHistory(contact);
                   close(context, contact);
                 },
               );
@@ -107,38 +107,29 @@ class ContactSearch extends SearchDelegate<Contact> {
   @override
   Widget buildSuggestions(BuildContext context) {
     final styles = Styles.of(context);
-    final List<Contact> contacts = query.isEmpty ? _history : getSuggestions();
 
-    return ListView.separated(
-      separatorBuilder: (_, __) => Separator(),
-      itemBuilder: (_, index) => ListTile(
-        leading: Icon(query.isEmpty ? Icons.history : Icons.account_circle),
-        title: Text(
-          contacts[index].fullName,
-          style: styles.texts.itemTile,
-        ),
-        onTap: () {
-          final contact = contacts[index];
-          _addToHistory(contact);
-          close(context, contact);
-        },
-      ),
-      itemCount: contacts.length,
-    );
-  }
-
-  List<Contact> getSuggestions() {
-    if (_suggestions.isNotEmpty) {
-      return _suggestions
-          .where((contact) => contact.fullName.contains(query))
-          .toList();
-    }
-    return [];
-  }
-
-  void _addToHistory(Contact contact) {
-    if (!_history.contains(contact)) {
-      _contactRepository.addToSearchHistory(contact);
-    }
+    return WithBloc<SearchBloc, SearchState<Contact>>(
+        createBloc: (context) =>
+            SearchBloc(_contactRepository)..getContactSuggestions(query),
+        builder: (context, bloc, state, _) {
+          final List<Contact> contacts = state.results;
+          return ListView.separated(
+            separatorBuilder: (_, __) => Separator(),
+            itemBuilder: (_, index) => ListTile(
+              leading:
+                  Icon(query.isEmpty ? Icons.history : Icons.account_circle),
+              title: Text(
+                contacts[index].fullName,
+                style: styles.texts.itemTile,
+              ),
+              onTap: () {
+                final contact = contacts[index];
+                bloc.addToContactHistory(contact);
+                close(context, contact);
+              },
+            ),
+            itemCount: contacts.length,
+          );
+        });
   }
 }
