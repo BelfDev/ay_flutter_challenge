@@ -11,7 +11,7 @@ class ContactBloc extends StateQueue<ContactState> {
 
   ContactBloc(this._contactRepository) : super(ContactState.initial());
 
-  Future<void> requestContactSections(String query) {
+  Future<void> requestContactSections() {
     final completer = Completer();
 
     run((state) async* {
