@@ -11,19 +11,7 @@ import 'package:with_bloc/with_bloc.dart';
 class ContactSearch extends SearchDelegate<Contact> {
   final ContactRepository _contactRepository;
 
-  List<Contact> _suggestions;
-
-  ContactSearch(this._contactRepository) {
-    _suggestions = [];
-    if (_contactRepository.hasCache) {
-      _contactRepository.fetchContacts().then((contactBook) {
-        _suggestions = contactBook.contacts;
-      });
-    }
-  }
-
-  List<Contact> get _history =>
-      _contactRepository.fetchContactSearchHistory().reversed.toList();
+  ContactSearch(this._contactRepository) : super();
 
   @override
   ThemeData appBarTheme(BuildContext context) {
