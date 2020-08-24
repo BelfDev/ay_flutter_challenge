@@ -14,14 +14,8 @@ import 'package:with_bloc/with_bloc.dart';
 
 /// A [StatelessWidget] which encapsulates the contents of the
 /// of the Contact Book screen.
-class ContactBookRoute extends StatefulWidget {
+class ContactBookRoute extends StatelessWidget {
   static const String id = '/contact-book';
-
-  @override
-  _ContactBookRouteState createState() => _ContactBookRouteState();
-}
-
-class _ContactBookRouteState extends State<ContactBookRoute> {
   static const double barExpandedHeight = 142;
 
   final refreshKey = GlobalKey<RefreshIndicatorState>();
@@ -56,10 +50,10 @@ class _ContactBookRouteState extends State<ContactBookRoute> {
                 ),
               ];
             },
-            body: _buildGroupedListView()));
+            body: _buildGroupedListView(context)));
   }
 
-  Widget _buildGroupedListView() {
+  Widget _buildGroupedListView(BuildContext context) {
     final styles = Styles.of(context);
 
     return WithBloc<ContactBloc, ContactState>(
