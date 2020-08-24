@@ -12,17 +12,18 @@ class ContactSearch extends SearchDelegate<Contact> {
   final ContactRepository _contactRepository;
 
   List<Contact> _suggestions;
-  List<Contact> _history;
 
   ContactSearch(this._contactRepository) {
     _suggestions = [];
-    _history = [Contact(firstName: 'Pedro', lastName: 'Belfort')];
     if (_contactRepository.hasCache) {
       _contactRepository.fetchContacts().then((contactBook) {
         _suggestions = contactBook.contacts;
       });
     }
   }
+
+  List<Contact> get _history =>
+      _contactRepository.fetchContactSearchHistory().reversed.toList();
 
   @override
   ThemeData appBarTheme(BuildContext context) {
@@ -137,7 +138,7 @@ class ContactSearch extends SearchDelegate<Contact> {
 
   void _addToHistory(Contact contact) {
     if (!_history.contains(contact)) {
-      _history.add(contact);
+      _contactRepository.addToSearchHistory(contact);
     }
   }
 }

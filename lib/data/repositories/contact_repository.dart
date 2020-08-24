@@ -12,6 +12,8 @@ class ContactRepository {
 
   ContactRepository._internal();
 
+  // In-memory cache for demonstration purposes
+  final _searchHistory = List<Contact>();
   ContactBook _contactBookCache;
 
   bool get hasCache => _contactBookCache?.sections?.isNotEmpty ?? false;
@@ -33,4 +35,9 @@ class ContactRepository {
       return null;
     }
   }
+
+  List<Contact> fetchContactSearchHistory() =>
+      List.unmodifiable(_searchHistory);
+
+  void addToSearchHistory(Contact contact) => _searchHistory.add(contact);
 }
