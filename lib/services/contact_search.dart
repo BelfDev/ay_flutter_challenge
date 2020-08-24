@@ -4,16 +4,25 @@ import 'package:ay_flutter_challenge/configs/app_theme.dart';
 import 'package:ay_flutter_challenge/data/models/models.dart';
 import 'package:ay_flutter_challenge/data/repositories/contact_repository.dart';
 import 'package:ay_flutter_challenge/utils/styles.dart';
+import 'package:ay_flutter_challenge/widgets/separator.dart';
 import 'package:flutter/material.dart';
 import 'package:with_bloc/with_bloc.dart';
 
 class ContactSearch extends SearchDelegate<Contact> {
   final ContactRepository _contactRepository;
 
-  ContactSearch(this._contactRepository);
+  List<Contact> _suggestions;
+  List<Contact> _history;
 
-  List<String> _suggestions = [];
-  List<String> _history = [];
+  ContactSearch(this._contactRepository) {
+    _suggestions = [];
+    _history = [Contact(firstName: 'Pedro', lastName: 'Belfort')];
+    if (_contactRepository.hasCache) {
+      _contactRepository.fetchContacts().then((contactBook) {
+        _suggestions = contactBook.contacts;
+      });
+    }
+  }
 
   @override
   ThemeData appBarTheme(BuildContext context) {
@@ -45,7 +54,10 @@ class ContactSearch extends SearchDelegate<Contact> {
   @override
   Widget buildResults(BuildContext context) {
     final styles = Styles.of(context);
-    _history.add(query);
+    if (query.isEmpty)
+      return Center(
+          child: Text('Display History', style: styles.texts.itemTile));
+
     return WithBloc<ContactSearchBloc, SearchState<Contact>>(
         createBloc: (context) =>
             ContactSearchBloc(_contactRepository)..searchContacts(query),
@@ -70,7 +82,6 @@ class ContactSearch extends SearchDelegate<Contact> {
             );
 
           final List<Contact> contacts = state.results;
-          _suggestions = contacts.map((contact) => contact.fullName).toList();
 
           return ListView.builder(
             itemBuilder: (context, index) {
@@ -78,9 +89,13 @@ class ContactSearch extends SearchDelegate<Contact> {
                 leading: Icon(Icons.account_circle),
                 title: Text(
                   contacts[index].fullName,
-                  style: styles.texts.sectionTile,
+                  style: styles.texts.itemTile,
                 ),
-                onTap: () => close(context, contacts[index]),
+                onTap: () {
+                  final contact = contacts[index];
+                  _addToHistory(contact);
+                  close(context, contact);
+                },
               );
             },
             itemCount: state.results.length,
@@ -91,24 +106,38 @@ class ContactSearch extends SearchDelegate<Contact> {
   @override
   Widget buildSuggestions(BuildContext context) {
     final styles = Styles.of(context);
-    final names = query.isEmpty ? _history : getSuggestions();
+    final List<Contact> contacts = query.isEmpty ? _history : getSuggestions();
 
-    return ListView.builder(
-      itemBuilder: (context, index) => ListTile(
-        leading: Icon(Icons.location_city),
+    return ListView.separated(
+      separatorBuilder: (_, __) => Separator(),
+      itemBuilder: (_, index) => ListTile(
+        leading: Icon(query.isEmpty ? Icons.history : Icons.account_circle),
         title: Text(
-          names[index],
-          style: styles.texts.sectionTile,
+          contacts[index].fullName,
+          style: styles.texts.itemTile,
         ),
+        onTap: () {
+          final contact = contacts[index];
+          _addToHistory(contact);
+          close(context, contact);
+        },
       ),
-      itemCount: names.length,
+      itemCount: contacts.length,
     );
   }
 
-  List<String> getSuggestions() {
+  List<Contact> getSuggestions() {
     if (_suggestions.isNotEmpty) {
-      return _suggestions.where((name) => name.startsWith(query)).toList();
+      return _suggestions
+          .where((contact) => contact.fullName.contains(query))
+          .toList();
     }
     return [];
+  }
+
+  void _addToHistory(Contact contact) {
+    if (!_history.contains(contact)) {
+      _history.add(contact);
+    }
   }
 }

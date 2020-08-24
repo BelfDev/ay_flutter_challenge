@@ -23,7 +23,7 @@ class ContactSearchBloc extends StateQueue<SearchState<Contact>> {
       if (contactBook != null) {
         final List<Contact> contacts = contactBook.contacts;
         final List<Contact> results = contacts
-            .where((contact) => contact.fullName.startsWith(query))
+            .where((contact) => contact.fullName.contains(query))
             .toList();
         yield SearchState.success(results);
       } else {
