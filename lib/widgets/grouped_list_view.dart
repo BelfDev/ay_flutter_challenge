@@ -49,9 +49,9 @@ class GroupedListView<S extends ExpandableListSection<T>, T>
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: <Widget>[
-        if (nested) ..._buildNestedScrollSetup(context),
-        if (_hasSliverAppBar) sliverAppBar,
+        if (nested) _buildNestedScrollSetup(),
         if (_hasHeader) header,
+        if (_hasSliverAppBar) sliverAppBar,
         _buildGroupedList(context),
         if (_hasFooter) footer,
       ],
@@ -79,12 +79,8 @@ class GroupedListView<S extends ExpandableListSection<T>, T>
     );
   }
 
-  List<Widget> _buildNestedScrollSetup(BuildContext context) => [
-        SliverOverlapInjector(
-            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context)),
-        SliverPersistentHeader(
-            pinned: true, floating: true, delegate: _SliverAppBarDelegate())
-      ];
+  Widget _buildNestedScrollSetup() => SliverPersistentHeader(
+      pinned: true, floating: true, delegate: _SliverAppBarDelegate());
 }
 
 // TODO: Find an alternative approach to preserve the sticky effect on nested scroll view

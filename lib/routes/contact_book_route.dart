@@ -20,6 +20,8 @@ class ContactBookRoute extends StatefulWidget {
 }
 
 class _ContactBookRouteState extends State<ContactBookRoute> {
+  static const double barExpandedHeight = 142;
+
   final refreshKey = GlobalKey<RefreshIndicatorState>();
 
   final repo = ContactRepository();
@@ -37,8 +39,7 @@ class _ContactBookRouteState extends State<ContactBookRoute> {
     return Scaffold(
         body: NestedScrollView(
             floatHeaderSlivers: false,
-            headerSliverBuilder:
-                (BuildContext context, bool innerBoxIsScrolled) {
+            headerSliverBuilder: (context, innerBoxIsScrolled) {
               return <Widget>[
                 SliverOverlapAbsorber(
                   handle:
@@ -46,11 +47,16 @@ class _ContactBookRouteState extends State<ContactBookRoute> {
                   sliver: FlexibleSliverAppBar(
                       title: 'Contacts',
                       forceElevated: innerBoxIsScrolled,
+                      expandedHeight: barExpandedHeight,
                       searchBar: SearchBar<Contact>(
+                        padding: const EdgeInsets.fromLTRB(
+                            16.0, barExpandedHeight - 8, 16.0, 0.0),
                         searchDelegate: ContactSearch(repo),
                         onResult: (Contact contact) {
-                          Navigator.of(context).pushNamed(ContactDetailRoute.id,
-                              arguments: {'title': contact.fullName});
+                          if (contact != null)
+                            Navigator.of(context).pushNamed(
+                                ContactDetailRoute.id,
+                                arguments: {'title': contact.fullName});
                         },
                       )),
                 ),
