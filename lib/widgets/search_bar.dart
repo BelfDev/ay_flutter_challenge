@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SearchBar<T> extends StatelessWidget {
-  final SearchDelegate<T> searchDelegate;
+typedef SearchResult<T> = Function(T result);
 
-  const SearchBar({Key key, this.searchDelegate})
+class SearchBar<T> extends StatelessWidget {
+  const SearchBar({Key key, this.searchDelegate, this.onResult})
       : assert(searchDelegate != null),
         super(key: key);
+
+  final SearchDelegate<T> searchDelegate;
+  final SearchResult<T> onResult;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,8 @@ class SearchBar<T> extends StatelessWidget {
             width: double.infinity,
             child: CupertinoTextField(
               onTap: () {
-                showSearch(context: context, delegate: searchDelegate);
+                showSearch(context: context, delegate: searchDelegate)
+                    .then((value) => onResult(value));
               },
               keyboardType: TextInputType.text,
               placeholder: 'Filtrar por nombre o nombre corto',

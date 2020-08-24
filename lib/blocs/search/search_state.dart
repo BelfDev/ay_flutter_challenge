@@ -28,4 +28,9 @@ class SearchState<T> {
         isLoading: false,
         hasError: true,
       );
+
+  @override
+  String toString() {
+    return runtimeType.toString();
+  }
 }

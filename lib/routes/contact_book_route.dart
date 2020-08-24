@@ -3,7 +3,9 @@ import 'package:ay_flutter_challenge/data/models/contact_book.dart';
 import 'package:ay_flutter_challenge/data/models/models.dart';
 import 'package:ay_flutter_challenge/data/repositories/contact_repository.dart';
 import 'package:ay_flutter_challenge/routes/contact_detail_route.dart';
+import 'package:ay_flutter_challenge/services/contact_search.dart';
 import 'package:ay_flutter_challenge/utils/styles.dart';
+import 'package:ay_flutter_challenge/widgets/search_bar.dart';
 import 'package:ay_flutter_challenge/widgets/tiles/grouped_list_item_tile.dart';
 import 'package:ay_flutter_challenge/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -42,9 +44,15 @@ class _ContactBookRouteState extends State<ContactBookRoute> {
                   handle:
                       NestedScrollView.sliverOverlapAbsorberHandleFor(context),
                   sliver: FlexibleSliverAppBar(
-                    title: 'Contacts',
-                    forceElevated: innerBoxIsScrolled,
-                  ),
+                      title: 'Contacts',
+                      forceElevated: innerBoxIsScrolled,
+                      searchBar: SearchBar<Contact>(
+                        searchDelegate: ContactSearch(repo),
+                        onResult: (Contact contact) {
+                          Navigator.of(context).pushNamed(ContactDetailRoute.id,
+                              arguments: {'title': contact.fullName});
+                        },
+                      )),
                 ),
               ];
             },
