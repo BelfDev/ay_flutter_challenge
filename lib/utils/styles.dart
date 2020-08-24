@@ -25,6 +25,8 @@ class Styles {
 
   /// Returns the App's divider color.
   Color get dividerColor => ThemeColors.greyShade250;
+
+  Color get placeholderIconColor => ThemeColors.lightGrey;
 }
 
 abstract class _ThemedStyle {
@@ -49,4 +51,7 @@ class _AppTexts extends _ThemedStyle {
   TextStyle get sectionTile => theme.textTheme.headline2;
 
   TextStyle get itemTile => theme.textTheme.bodyText1;
+
+  TextStyle get error =>
+      theme.textTheme.bodyText1.apply(color: ThemeColors.grey);
 }
