@@ -5,21 +5,29 @@ import 'package:flutter/material.dart';
 /// Single source of truth for fetching contact data.
 /// The repository may retrieve data from a local or remote data source.
 class ContactRepository {
-  static const futureDelay = 2000; // milliseconds
+  static const futureDelay = 1000; // milliseconds
   static final ContactRepository _instance = ContactRepository._internal();
 
   factory ContactRepository() => _instance;
 
   ContactRepository._internal();
 
-  /// Returns a Future<List<Contact>> with all available contacts.
-  Future<ContactBook> fetchContacts() async {
-    try {
-      final ContactBook contactBook =
-          ContactBook.from(LocalDataSource.contacts);
+  ContactBook _contactBookCache;
 
-      return Future.delayed(
-          Duration(milliseconds: futureDelay), () => contactBook);
+  bool get hasCache => _contactBookCache?.sections?.isNotEmpty ?? false;
+
+  /// Returns a Future<List<Contact>> with all available contacts.
+  Future<ContactBook> fetchContacts([bool forceRemote = false]) async {
+    try {
+      if (forceRemote || _contactBookCache == null) {
+        final ContactBook contactBook =
+            ContactBook.from(LocalDataSource.contacts);
+        _contactBookCache = contactBook;
+        return Future.delayed(
+            Duration(milliseconds: futureDelay), () => contactBook);
+      } else {
+        return _contactBookCache;
+      }
     } catch (e) {
       debugPrint(e);
       return null;
