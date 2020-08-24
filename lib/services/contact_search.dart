@@ -1,4 +1,4 @@
-import 'package:ay_flutter_challenge/blocs/search/contact_search_bloc.dart';
+import 'package:ay_flutter_challenge/blocs/search/search_bloc.dart';
 import 'package:ay_flutter_challenge/blocs/search/search_state.dart';
 import 'package:ay_flutter_challenge/configs/app_theme.dart';
 import 'package:ay_flutter_challenge/data/models/models.dart';
@@ -59,9 +59,9 @@ class ContactSearch extends SearchDelegate<Contact> {
       return Center(
           child: Text('Display History', style: styles.texts.itemTile));
 
-    return WithBloc<ContactSearchBloc, SearchState<Contact>>(
+    return WithBloc<SearchBloc, SearchState<Contact>>(
         createBloc: (context) =>
-            ContactSearchBloc(_contactRepository)..searchContacts(query),
+            SearchBloc(_contactRepository)..searchContacts(query),
         builder: (context, bloc, state, _) {
           if (state.isLoading)
             return Center(child: CircularProgressIndicator());
