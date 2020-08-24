@@ -7,10 +7,10 @@ import 'package:state_queue/state_queue.dart';
 
 import 'search_state.dart';
 
-class ContactSearchBloc extends StateQueue<SearchState<Contact>> {
+class SearchBloc extends StateQueue<SearchState<Contact>> {
   final ContactRepository _contactRepository;
 
-  ContactSearchBloc(this._contactRepository) : super(SearchState.initial());
+  SearchBloc(this._contactRepository) : super(SearchState.initial());
 
   Future<void> searchContacts(String query) {
     final completer = Completer();
