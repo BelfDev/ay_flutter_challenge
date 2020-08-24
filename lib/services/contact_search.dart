@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ay_flutter_challenge/blocs/search/search_bloc.dart';
 import 'package:ay_flutter_challenge/blocs/search/search_state.dart';
 import 'package:ay_flutter_challenge/configs/app_theme.dart';
@@ -5,39 +7,50 @@ import 'package:ay_flutter_challenge/data/models/models.dart';
 import 'package:ay_flutter_challenge/data/repositories/contact_repository.dart';
 import 'package:ay_flutter_challenge/utils/styles.dart';
 import 'package:ay_flutter_challenge/widgets/separator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:with_bloc/with_bloc.dart';
 
 class ContactSearch extends SearchDelegate<Contact> {
+  static const String _hintLabel = "Type in a contact's name";
+
   final ContactRepository _contactRepository;
 
   ContactSearch(this._contactRepository) : super();
 
   @override
+  String get searchFieldLabel => _hintLabel;
+
+  @override
   ThemeData appBarTheme(BuildContext context) {
-    return AppTheme.of(context);
+    final appTheme = AppTheme.of(context);
+    return Theme.of(context).copyWith(
+        primaryColor: appTheme.appBarTheme.color,
+        primaryIconTheme: appTheme.primaryIconTheme,
+        primaryColorBrightness: appTheme.primaryColorBrightness,
+        textTheme: appTheme.textTheme);
   }
 
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
-      IconButton(
-        icon: Icon(Icons.clear),
-        onPressed: () {
-          query = '';
-        },
-      ),
+      Padding(
+          padding: const EdgeInsets.only(right: 8),
+          child: IconButton(
+            icon:
+                Icon(Platform.isIOS ? CupertinoIcons.clear_thick : Icons.clear),
+            iconSize: 28,
+            onPressed: () => query = '',
+          )),
     ];
   }
 
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      icon: BackButtonIcon(),
-      onPressed: () {
-        close(context, null);
-      },
-    );
+        icon: Icon(Platform.isIOS ? CupertinoIcons.back : Icons.arrow_back),
+        iconSize: 32,
+        onPressed: () => close(context, null));
   }
 
   @override
