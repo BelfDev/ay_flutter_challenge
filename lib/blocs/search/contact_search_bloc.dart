@@ -8,13 +8,9 @@ import 'package:state_queue/state_queue.dart';
 import 'search_state.dart';
 
 class ContactSearchBloc extends StateQueue<SearchState<Contact>> {
-  // TODO: Decide between consuming a cached ContactBook or fetching again through the repository
   final ContactRepository _contactRepository;
 
-  ContactSearchBloc(this._contactRepository)
-      :
-//        assert(contactRepository != null),
-        super(SearchState.initial());
+  ContactSearchBloc(this._contactRepository) : super(SearchState.initial());
 
   Future<void> searchContacts(String query) {
     final completer = Completer();
@@ -27,7 +23,7 @@ class ContactSearchBloc extends StateQueue<SearchState<Contact>> {
       if (contactBook != null) {
         final List<Contact> contacts = contactBook.contacts;
         final List<Contact> results = contacts
-            .where((contact) => contact.fullName.contains(query))
+            .where((contact) => contact.fullName.startsWith(query))
             .toList();
         yield SearchState.success(results);
       } else {
