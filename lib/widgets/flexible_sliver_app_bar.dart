@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import 'gradient_filter.dart';
+
 /// Customized [SliverAppBar] that expands and contracts according to the
 /// scroll position. By default, the bar initiates fully expanded and
 /// shrinks upon scrolling.
@@ -43,20 +45,16 @@ class FlexibleSliverAppBar extends StatelessWidget {
           titlePadding:
               collapsed ? null : EdgeInsets.only(left: 16, bottom: 72),
           centerTitle: collapsed,
-//          background: Stack(
-//            fit: StackFit.expand,
-//            children: [
-//              Image.network(
-//                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-//                fit: BoxFit.cover,
-//              ),
-//              GradientFilter(),
-//            ],
-//          ),
           background: Stack(
+            fit: StackFit.expand,
             children: [
+              Image.network(
+                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+                fit: BoxFit.cover,
+              ),
+              GradientFilter(),
               if (_hasSearchBar)
-                Align(alignment: Alignment.bottomCenter, child: searchBar)
+                Align(alignment: Alignment.bottomCenter, child: searchBar),
             ],
           ),
         );

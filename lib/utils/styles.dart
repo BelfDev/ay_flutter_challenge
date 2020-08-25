@@ -46,6 +46,11 @@ class _AppGradients extends _ThemedStyle {
       end: Alignment.bottomLeft,
       colors: [ThemeColors.greyShade300, ThemeColors.greyShade250]);
 
+  final appBar = const LinearGradient(
+      begin: Alignment.bottomCenter,
+      end: Alignment.topCenter,
+      colors: [ThemeColors.smoothBlack, ThemeColors.transparentBlack]);
+
   const _AppGradients(theme) : super(theme);
 }
 
