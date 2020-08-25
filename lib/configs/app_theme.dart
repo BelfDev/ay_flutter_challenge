@@ -26,7 +26,7 @@ class AppTheme {
         hintStyle: TextStyle(fontSize: _h2, color: ThemeColors.greyShade250),
       ),
       appBarTheme: AppBarTheme(
-        color: ThemeColors.brown,
+        color: ThemeColors.smoothBlack,
       ),
       textTheme: TextTheme(
         headline1: TextStyle(
