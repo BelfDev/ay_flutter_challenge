@@ -32,6 +32,13 @@ dependencies:
   # Custom UI widgets
   sticky_and_expandable_list: ^0.2.1
 
+  # State Management
+  with_bloc: ^2.0.0
+  state_queue: ^2.0.0
+
+  # Custom capabilities
+  url_launcher: ^5.5.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -47,11 +54,9 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
-
+  # Assets
+  assets:
+    - assets/images/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

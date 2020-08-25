@@ -25,6 +25,12 @@ class Styles {
 
   /// Returns the App's divider color.
   Color get dividerColor => ThemeColors.greyShade250;
+
+  /// Returns the App's placeholder icon color.
+  Color get placeholderIconColor => ThemeColors.lightGrey;
+
+  /// Returns the App's search bar color.
+  Color get searchBarColor => ThemeColors.smoothWhite;
 }
 
 abstract class _ThemedStyle {
@@ -40,6 +46,11 @@ class _AppGradients extends _ThemedStyle {
       end: Alignment.bottomLeft,
       colors: [ThemeColors.greyShade300, ThemeColors.greyShade250]);
 
+  final appBar = const LinearGradient(
+      begin: Alignment.bottomCenter,
+      end: Alignment.topCenter,
+      colors: [ThemeColors.transparentPurple, ThemeColors.transparentBlack]);
+
   const _AppGradients(theme) : super(theme);
 }
 
@@ -49,4 +60,16 @@ class _AppTexts extends _ThemedStyle {
   TextStyle get sectionTile => theme.textTheme.headline2;
 
   TextStyle get itemTile => theme.textTheme.bodyText1;
+
+  TextStyle get error =>
+      theme.textTheme.bodyText1.apply(color: ThemeColors.grey);
+
+  TextStyle get hint =>
+      theme.textTheme.bodyText1.apply(color: ThemeColors.grey);
+
+  TextStyle get myCardTitle =>
+      theme.textTheme.headline1.apply(color: ThemeColors.smoothBlack);
+
+  TextStyle get myCardSubtitle =>
+      theme.textTheme.headline2.apply(color: ThemeColors.grey);
 }
