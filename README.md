@@ -1,6 +1,6 @@
 <h2 align="center">
-  <br>
   <img width="200" src=".github/project-logo.png">
+  <br>
   <br>
   Flutter Coding Challenge
   <br>
