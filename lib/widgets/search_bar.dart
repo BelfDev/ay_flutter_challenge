@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-typedef SearchResult<T> = Function(T result);
+typedef SearchResult<T> = Function(BuildContext context, T result);
 
+/// A customized [CupertinoTextField] used as a search bar.
+/// This widget is typically part of a [FlexibleSliverAppBar].
 class SearchBar<T> extends StatelessWidget {
   static const double height = 36;
 
@@ -24,7 +26,7 @@ class SearchBar<T> extends StatelessWidget {
         child: CupertinoTextField(
           onTap: () {
             showSearch(context: context, delegate: searchDelegate)
-                .then((value) => onResult(value));
+                .then((value) => onResult(context, value));
           },
           keyboardType: TextInputType.text,
           placeholder: 'Filtrar por nombre o nombre corto',
