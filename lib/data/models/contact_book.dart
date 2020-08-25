@@ -24,6 +24,10 @@ class ContactBook {
     final modifiableEntries = List<String>.from(entries);
 
     modifiableEntries
+      // Removes null entries
+      // Dual-Pivot Quicksort algorithm
+      // O(n log(n))
+      ..removeWhere((value) => value == null)
       // Sorts the given contact entries
       // Dual-Pivot Quicksort algorithm or Insertion Sort (small lists);
       // O(n log(n)) or О(n^2);
@@ -39,6 +43,7 @@ class ContactBook {
           final sectionKey =
               rawEntry.startsWithPunctuation ? '#' : contact.firstNameInitial;
 
+          // Populates [_sectionMap] and [_sections]
           if (!_sectionMap.containsKey(sectionKey)) {
             final contacts = List<Contact>();
             final section =
@@ -50,11 +55,11 @@ class ContactBook {
           // we can add an item for both via the reference.
           _sectionMap[sectionKey].addItem(contact);
         }
-
-        // Throws an exception if all entries are invalid.
-        if (_sectionMap.isEmpty)
-          throw InvalidDataException<List<String>>(data: entries);
       });
+
+    // Throws an exception if all entries are invalid.
+    if (_sectionMap.isEmpty)
+      throw InvalidDataException<List<String>>(data: entries);
   }
 
   ContactBook._();
