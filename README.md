@@ -8,6 +8,7 @@
 
 <p align="middle">
   <img src=".github/ios-app-result.png" width="200" />
+  <br>
   <img src=".github/android-app-result.png" width="200" />
 </p>
 
