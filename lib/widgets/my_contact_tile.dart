@@ -15,10 +15,17 @@ class MyContactTile extends StatelessWidget {
     return ListTile(
       contentPadding: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 16.0),
       dense: false,
-      leading: CircleAvatar(
-        radius: 32.0,
-        backgroundImage: NetworkImage(_avatarImageSrc),
-        backgroundColor: Colors.transparent,
+      leading: ClipOval(
+        child: FadeInImage.assetNetwork(
+          fit: BoxFit.cover,
+          image: _avatarImageSrc,
+          placeholder: 'assets/images/avatar_placeholder.png',
+        ),
+      ),
+      trailing: Icon(
+        Icons.favorite_border,
+        color: styles.placeholderIconColor,
+        size: 32,
       ),
       title: Text(
         'Pedro Belfort',
