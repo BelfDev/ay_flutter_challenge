@@ -6,9 +6,14 @@
   <br>
 </h1>
 
-![iOS result](.github/ios-app-result.png "ios-result") ![Android result](.github/android-app-result.png "android-result")
+<p float="left">
+  <img src=".github/ios-app-result.png" width="100" />
+  <img src=".github/android-app-result.png" width="100" />
+</p>
 
 ## Getting Started
+
+
 
 This project is a starting point for a Flutter application.
 
