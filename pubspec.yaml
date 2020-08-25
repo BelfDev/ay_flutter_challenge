@@ -36,6 +36,9 @@ dependencies:
   with_bloc: ^2.0.0
   state_queue: ^2.0.0
 
+  # Custom capabilities
+  url_launcher: ^5.5.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

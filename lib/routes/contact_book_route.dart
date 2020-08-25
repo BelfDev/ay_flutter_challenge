@@ -5,6 +5,7 @@ import 'package:ay_flutter_challenge/data/repositories/contact_repository.dart';
 import 'package:ay_flutter_challenge/routes/contact_detail_route.dart';
 import 'package:ay_flutter_challenge/services/contact_search.dart';
 import 'package:ay_flutter_challenge/utils/styles.dart';
+import 'package:ay_flutter_challenge/widgets/my_contact_tile.dart';
 import 'package:ay_flutter_challenge/widgets/placeholders/error_placeholder.dart';
 import 'package:ay_flutter_challenge/widgets/search_bar.dart';
 import 'package:ay_flutter_challenge/widgets/tiles/grouped_list_item_tile.dart';
@@ -126,14 +127,7 @@ class ContactBookRoute extends StatelessWidget {
   /// Builds a dummy header for demonstration purposes.
   Widget _buildGroupedListViewHeader(BuildContext context) {
     final styles = Styles.of(context);
-    return SliverToBoxAdapter(
-      child: Container(
-        alignment: Alignment.center,
-        height: 64,
-        child: Text('Pedro Belfort\n= Made in Brazil =',
-            textAlign: TextAlign.center, style: styles.texts.sectionTile),
-      ),
-    );
+    return SliverToBoxAdapter(child: MyContactTile());
   }
 
   /// Builds a dummy footer for demonstration purposes.
@@ -143,7 +137,7 @@ class ContactBookRoute extends StatelessWidget {
           (BuildContext context, int index) {
             return Container(
               alignment: Alignment.center,
-              color: Colors.lightBlue[100 * (index % 9)],
+              color: Colors.grey[100 * (index % 9)],
               child: Text('list item $index'),
             );
           },

@@ -61,4 +61,10 @@ class _AppTexts extends _ThemedStyle {
 
   TextStyle get hint =>
       theme.textTheme.bodyText1.apply(color: ThemeColors.grey);
+
+  TextStyle get myCardTitle =>
+      theme.textTheme.headline1.apply(color: ThemeColors.smoothBlack);
+
+  TextStyle get myCardSubtitle =>
+      theme.textTheme.headline2.apply(color: ThemeColors.grey);
 }
