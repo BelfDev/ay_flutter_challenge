@@ -42,7 +42,7 @@ class FlexibleSliverAppBar extends StatelessWidget {
           title: SafeArea(child: Text(title)),
           titlePadding:
               collapsed ? null : EdgeInsets.only(left: 16, bottom: 72),
-          centerTitle: collapsed ? true : false,
+          centerTitle: collapsed,
 //          background: Stack(
 //            fit: StackFit.expand,
 //            children: [
@@ -54,7 +54,10 @@ class FlexibleSliverAppBar extends StatelessWidget {
 //            ],
 //          ),
           background: Stack(
-            children: [if (_hasSearchBar) searchBar],
+            children: [
+              if (_hasSearchBar)
+                Align(alignment: Alignment.bottomCenter, child: searchBar)
+            ],
           ),
         );
       }),

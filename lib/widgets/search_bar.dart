@@ -11,17 +11,12 @@ class SearchBar<T> extends StatelessWidget {
   static const String _placeholderHint = 'Tap to search contacts';
 
   const SearchBar(
-      {Key key,
-      this.searchDelegate,
-      this.onResult,
-      this.padding,
-      this.borderRadius})
+      {Key key, this.searchDelegate, this.onResult, this.borderRadius})
       : assert(searchDelegate != null),
         super(key: key);
 
   final SearchDelegate<T> searchDelegate;
   final SearchResult<T> onResult;
-  final EdgeInsetsGeometry padding;
   final BorderRadiusGeometry borderRadius;
 
   @override
@@ -29,7 +24,7 @@ class SearchBar<T> extends StatelessWidget {
     final styles = Styles.of(context);
     final radius = borderRadius ?? BorderRadius.circular(8.0);
     return Padding(
-      padding: padding ?? EdgeInsets.zero,
+      padding: const EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
       child: Container(
         height: _height,
         width: double.infinity,

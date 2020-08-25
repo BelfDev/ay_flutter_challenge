@@ -57,21 +57,13 @@ class ContactBookRoute extends StatelessWidget {
       ];
 
   /// Builds the search bar taking into account the device's orientation.
-  Widget _buildSearchBar(BuildContext context) =>
-      OrientationBuilder(builder: (context, orientation) {
-        final isPortraitMode =
-            MediaQuery.of(context).orientation == Orientation.portrait;
-        final double topPadding =
-            isPortraitMode ? _barExpandedHeight - 16 : _barExpandedHeight - 56;
-        return SafeArea(
-          top: false,
-          bottom: false,
-          child: SearchBar<Contact>(
-              padding: EdgeInsets.fromLTRB(16.0, topPadding, 16.0, 0.0),
-              searchDelegate: ContactSearchDelegate(contactRepository),
-              onResult: _onSearchResult),
-        );
-      });
+  Widget _buildSearchBar(BuildContext context) => SafeArea(
+        top: false,
+        bottom: false,
+        child: SearchBar<Contact>(
+            searchDelegate: ContactSearchDelegate(contactRepository),
+            onResult: _onSearchResult),
+      );
 
   Widget _buildBody(BuildContext context) =>
       WithBloc<ContactBloc, ContactState>(
