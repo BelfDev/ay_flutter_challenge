@@ -1,35 +1,31 @@
-import 'package:ay_flutter_challenge/data/models/contact.dart';
-import 'package:ay_flutter_challenge/data/models/models.dart';
+part of 'contact_bloc.dart';
 
+/// Defines every possible contact state which
+/// is typically emitted by the [ContactBloc].
 class ContactState {
-  final bool isLoading;
+  final StateStatus status;
   final List<Section<Contact>> results;
-  final bool hasError;
 
-  const ContactState({this.isLoading, this.results, this.hasError});
+  const ContactState({this.status, this.results});
 
   factory ContactState.initial() => ContactState(
+        status: StateStatus.initial,
         results: [],
-        isLoading: false,
-        hasError: false,
       );
 
-  factory ContactState.loading() => ContactState(
-        results: [],
-        isLoading: true,
-        hasError: false,
+  factory ContactState.loading(List<Section<Contact>> sections) => ContactState(
+        status: StateStatus.inProgress,
+        results: sections,
       );
 
   factory ContactState.success(List<Section<Contact>> sections) => ContactState(
+        status: StateStatus.success,
         results: sections,
-        isLoading: false,
-        hasError: false,
       );
 
   factory ContactState.error() => ContactState(
+        status: StateStatus.failure,
         results: [],
-        isLoading: false,
-        hasError: true,
       );
 
   @override

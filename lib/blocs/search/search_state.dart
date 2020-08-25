@@ -1,32 +1,31 @@
-class SearchState<T> {
-  final bool isLoading;
-  final List<T> results;
-  final bool hasError;
+part of 'search_bloc.dart';
 
-  const SearchState({this.isLoading, this.results, this.hasError});
+/// Defines every possible contact state which
+/// is typically emitted by the [SearchBloc].
+class SearchState<T> {
+  final List<T> results;
+  final StateStatus status;
+
+  const SearchState({this.status, this.results});
 
   factory SearchState.initial() => SearchState(
+        status: StateStatus.initial,
         results: [],
-        isLoading: false,
-        hasError: false,
       );
 
   factory SearchState.loading() => SearchState(
+        status: StateStatus.inProgress,
         results: [],
-        isLoading: true,
-        hasError: false,
       );
 
   factory SearchState.success(List<T> results) => SearchState(
+        status: StateStatus.success,
         results: results,
-        isLoading: false,
-        hasError: false,
       );
 
   factory SearchState.error() => SearchState(
+        status: StateStatus.failure,
         results: [],
-        isLoading: false,
-        hasError: true,
       );
 
   @override
