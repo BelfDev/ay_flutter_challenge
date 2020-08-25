@@ -1,6 +1,7 @@
 import 'package:ay_flutter_challenge/utils/styles.dart';
 import 'package:flutter/material.dart';
 
+/// A customized [Container] that displays 'empty content' feedback.
 class EmptyContentPlaceholder extends StatelessWidget {
   static const String _defaultMessage = 'Nothing was found...';
 
