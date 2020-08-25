@@ -15,12 +15,12 @@ class AppTheme {
   static ThemeData of(BuildContext context) {
     final baseTheme = Theme.of(context);
     return baseTheme.copyWith(
-      primaryColor: ThemeColors.grey,
-      accentColor: ThemeColors.brown,
+      primaryColor: ThemeColors.smoothBlack,
+      accentColor: ThemeColors.purple,
       cupertinoOverrideTheme: CupertinoThemeData(
-        primaryColor: ThemeColors.darkBrown,
+        primaryColor: ThemeColors.purple,
       ),
-      cursorColor: ThemeColors.darkBrown,
+      cursorColor: ThemeColors.purple,
       scaffoldBackgroundColor: ThemeColors.smoothWhite,
       inputDecorationTheme: InputDecorationTheme(
         hintStyle: TextStyle(fontSize: _h2, color: ThemeColors.greyShade250),
