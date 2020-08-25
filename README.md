@@ -6,7 +6,7 @@
   <br>
 </h1>
 
-[![Downloads](.github/project-logo.png)]()
+[![Downloads](.github/project-logo.png)](http://pepy.tech/count/stronghold)
 
 
 ## Getting Started
