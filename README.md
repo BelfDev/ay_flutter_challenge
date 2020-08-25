@@ -7,7 +7,7 @@
 </h1>
 
 <p align="middle">
-  <img src=".github/ios-app-result.png" width="200 hspace="24" />
+  <img src=".github/ios-app-result.png" width="200" hspace="24" />
   <img src=".github/android-app-result.png" width="200" />
 </p>
 
