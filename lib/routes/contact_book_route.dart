@@ -51,15 +51,24 @@ class ContactBookRoute extends StatelessWidget {
               title: _routeTitle,
               forceElevated: innerBoxIsScrolled,
               expandedHeight: _barExpandedHeight,
-              searchBar: _buildSearchBar()),
+              searchBar: _buildSearchBar(context)),
         ),
       ];
 
-  Widget _buildSearchBar() => SearchBar<Contact>(
-      padding:
-          const EdgeInsets.fromLTRB(16.0, _barExpandedHeight - 16, 16.0, 0.0),
-      searchDelegate: ContactSearchDelegate(contactRepository),
-      onResult: _onSearchResult);
+  /// Builds the search bar taking into account the device's orientation.
+  Widget _buildSearchBar(BuildContext context) =>
+      OrientationBuilder(builder: (context, orientation) {
+        final isPortraitMode =
+            MediaQuery.of(context).orientation == Orientation.portrait;
+        final double topPadding =
+            isPortraitMode ? _barExpandedHeight - 16 : _barExpandedHeight - 56;
+        final double horizontalPadding = isPortraitMode ? 16 : 48;
+        return SearchBar<Contact>(
+            padding: EdgeInsets.fromLTRB(
+                horizontalPadding, topPadding, horizontalPadding, 0.0),
+            searchDelegate: ContactSearchDelegate(contactRepository),
+            onResult: _onSearchResult);
+      });
 
   Widget _buildBody(BuildContext context) =>
       WithBloc<ContactBloc, ContactState>(
@@ -91,7 +100,6 @@ class ContactBookRoute extends StatelessWidget {
 
   Widget _buildGroupedListView(
       BuildContext context, List<Section<Contact>> sectionList) {
-    final styles = Styles.of(context);
     return GroupedListView<Section<Contact>, Contact>(
         nested: true,
         header: _buildGroupedListViewHeader(context),
