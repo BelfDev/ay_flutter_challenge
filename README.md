@@ -1,10 +1,11 @@
-# ay_flutter_challenge
+<h1 align="center">
+  <br>
+  <img width="200" src=".github/project-logo.png">
+  <br>
+  Flutter Coding Challenge
+  <br>
+</h1>
 
-Contacts App made as part of About You Flutter challenge.
-
-<p align="center">
-<img width="200" src=".github/project-logo.png">
-</p>
 
 ## Getting Started
 
