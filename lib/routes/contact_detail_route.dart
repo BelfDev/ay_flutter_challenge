@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 /// of the Contact Detail screen.
 class ContactDetailRoute extends StatelessWidget {
   static const String id = '/contact-detail';
+  static const String _routeTitle = 'Contact Detail';
 
   @override
   Widget build(BuildContext context) {
@@ -14,15 +15,17 @@ class ContactDetailRoute extends StatelessWidget {
 
     final theme = AppTheme.of(context);
     return Scaffold(
+      appBar: AppBar(
+        title: Text(_routeTitle),
+      ),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.dark,
         child: SafeArea(
-          child: Container(
-              child: Center(
-                  child: Text(
+          child: Center(
+              child: Text(
             title,
             style: theme.textTheme.headline1,
-          ))),
+          )),
         ),
       ),
     );
