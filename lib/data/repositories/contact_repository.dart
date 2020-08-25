@@ -19,15 +19,20 @@ class ContactRepository {
   bool get hasCache => _contactBookCache?.sections?.isNotEmpty ?? false;
 
   /// Returns a Future<List<Contact>> with all available contacts.
-  Future<ContactBook> fetchContacts([bool forceRemote = false]) async {
+  /// An in-memory cache is created after the first successful remote fetch.
+  /// This cache is returned in subsequent calls to this method.
+  /// The [forceRemote] flag can be passed to enforce an asynchronous request.
+  Future<ContactBook> fetchContacts({bool forceRemote = false}) async {
     try {
       if (forceRemote || _contactBookCache == null) {
         final ContactBook contactBook =
             ContactBook.from(LocalDataSource.contacts);
         _contactBookCache = contactBook;
+        // Simulates an asynchronous request
         return Future.delayed(
             Duration(milliseconds: futureDelay), () => contactBook);
       } else {
+        // Returns the cached contact book
         return _contactBookCache;
       }
     } catch (e) {
@@ -36,8 +41,11 @@ class ContactRepository {
     }
   }
 
+  /// Returns an unmodifiable [List] of contacts which were
+  /// fetched at some point in the past.
   List<Contact> fetchContactSearchHistory() =>
       List.unmodifiable(_searchHistory);
 
+  /// Adds a contact to the search history list.
   void addToSearchHistory(Contact contact) => _searchHistory.add(contact);
 }
