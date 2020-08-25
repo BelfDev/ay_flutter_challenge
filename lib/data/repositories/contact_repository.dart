@@ -35,6 +35,7 @@ class ContactRepository {
         return _contactBookCache;
       }
     } catch (e) {
+      print(e);
       return null;
     }
   }

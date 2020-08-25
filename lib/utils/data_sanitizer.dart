@@ -18,7 +18,8 @@ class DataSanitizer {
     // Check if entry is null
     if (entry == null) foundIssues.add(_InputIssue.nullEntry);
     // Check if entry is empty
-    if (entry.isEmpty) foundIssues.add(_InputIssue.emptyEntry);
+    if (entry.isEmpty || entry.trim().length == 0)
+      foundIssues.add(_InputIssue.emptyEntry);
 
     final isValid = foundIssues.isEmpty;
     final sanitizedValue = entry.trim();
