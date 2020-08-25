@@ -48,8 +48,8 @@ class FlexibleSliverAppBar extends StatelessWidget {
           background: Stack(
             fit: StackFit.expand,
             children: [
-              Image.network(
-                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+              Image.asset(
+                'assets/images/icon_pattern.png',
                 fit: BoxFit.cover,
               ),
               GradientFilter(),

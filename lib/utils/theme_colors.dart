@@ -23,5 +23,8 @@ class ThemeColors {
   static const Color smoothBlack = const Color(0xFF212121);
   static const Color transparentBlack = const Color(0x77212121);
 
+  // Purple
+  static const Color transparentPurple = const Color(0x99323044);
+
   ThemeColors._();
 }
