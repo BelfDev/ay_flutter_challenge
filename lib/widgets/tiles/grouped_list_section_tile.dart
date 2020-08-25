@@ -24,7 +24,10 @@ class GroupedListSectionTile extends StatelessWidget {
         padding: _childPadding,
         child: Align(
             alignment: Alignment.centerLeft,
-            child: Text(title, style: styles.texts.sectionTile)),
+            child: SafeArea(
+                top: false,
+                bottom: false,
+                child: Text(title, style: styles.texts.sectionTile))),
       ),
     );
   }

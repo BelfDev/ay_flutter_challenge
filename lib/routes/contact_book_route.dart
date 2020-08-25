@@ -62,12 +62,14 @@ class ContactBookRoute extends StatelessWidget {
             MediaQuery.of(context).orientation == Orientation.portrait;
         final double topPadding =
             isPortraitMode ? _barExpandedHeight - 16 : _barExpandedHeight - 56;
-        final double horizontalPadding = isPortraitMode ? 16 : 48;
-        return SearchBar<Contact>(
-            padding: EdgeInsets.fromLTRB(
-                horizontalPadding, topPadding, horizontalPadding, 0.0),
-            searchDelegate: ContactSearchDelegate(contactRepository),
-            onResult: _onSearchResult);
+        return SafeArea(
+          top: false,
+          bottom: false,
+          child: SearchBar<Contact>(
+              padding: EdgeInsets.fromLTRB(16.0, topPadding, 16.0, 0.0),
+              searchDelegate: ContactSearchDelegate(contactRepository),
+              onResult: _onSearchResult),
+        );
       });
 
   Widget _buildBody(BuildContext context) =>

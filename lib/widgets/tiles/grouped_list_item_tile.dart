@@ -19,7 +19,10 @@ class GroupedListItemTile extends StatelessWidget {
     print(title);
 
     final styles = Styles.of(context);
-    return ListTile(dense: true, title: _buildTitle(styles), onTap: onTap);
+    return SafeArea(
+        top: false,
+        bottom: false,
+        child: ListTile(dense: true, title: _buildTitle(styles), onTap: onTap));
   }
 
   Widget _buildTitle(Styles styles) {
