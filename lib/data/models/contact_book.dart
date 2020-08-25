@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:ay_flutter_challenge/data/models/sanitized_entry.dart';
 import 'package:ay_flutter_challenge/utils/data_sanitizer.dart';
+import 'package:ay_flutter_challenge/utils/exceptions/exceptions.dart';
 
 import 'contact.dart';
 import 'section.dart';
@@ -17,6 +18,7 @@ class ContactBook {
   /// Complexity: O(n) or O(n^2) for small lists
   ///
   /// Adversarial inputs are not included in the [ContactBook].
+  /// throws an [InvalidDataException] if all entries are invalid.
   ContactBook.from(List<String> entries) {
     final modifiableEntries = List.from(entries);
 
@@ -45,6 +47,10 @@ class ContactBook {
           // we can add an item for both via the reference.
           _sectionMap[sectionKey].addItem(contact);
         }
+
+        // Throws an exception if all entries are invalid.
+        if (_sectionMap.isEmpty)
+          throw InvalidDataException<List<String>>(data: entries);
       });
   }
 
