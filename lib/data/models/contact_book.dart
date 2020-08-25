@@ -1,17 +1,22 @@
 import 'dart:collection';
 
+import 'package:ay_flutter_challenge/data/models/sanitized_entry.dart';
+import 'package:ay_flutter_challenge/utils/data_sanitizer.dart';
+
 import 'contact.dart';
 import 'section.dart';
 
 /// A custom data structure that contains [Contact]s grouped by [Section]s.
+/// The ContactBook.from named constructor takes care of parsing contacts
+/// from a provided list of strings.
 class ContactBook {
   final _sectionMap = LinkedHashMap<String, Section<Contact>>();
   final _sections = List<Section<Contact>>();
 
-  /// TODO: Treat parsing edge cases.
-  /// TODO: Treat edge case for weird initials.
   /// Creates a [ContactBook] instance based on the given list of [String] entries.
   /// Complexity: O(n) or O(n^2) for small lists
+  ///
+  /// Adversarial inputs are not included in the [ContactBook].
   ContactBook.from(List<String> entries) {
     final modifiableEntries = List.from(entries);
 
@@ -22,19 +27,24 @@ class ContactBook {
       ..sort()
       // Populates the sectionMap and section list by using a common first name initial as key
       // O(n)
-      ..forEach((entry) {
-        final Contact contact = Contact.fromFullName(fullName: entry);
-        final sectionKey = contact.firstNameInitial;
+      ..forEach((rawEntry) {
+        final SanitizedEntry entry =
+            DataSanitizer.sanitizeContactEntry(rawEntry);
+        if (entry.isValid) {
+          final Contact contact = Contact.fromFullName(fullName: entry.value);
+          final sectionKey = contact.firstNameInitial;
 
-        if (!_sectionMap.containsKey(sectionKey)) {
-          final contacts = List<Contact>();
-          final section = Section<Contact>(title: sectionKey, items: contacts);
-          _sectionMap[sectionKey] = section;
-          _sections.add(section);
+          if (!_sectionMap.containsKey(sectionKey)) {
+            final contacts = List<Contact>();
+            final section =
+                Section<Contact>(title: sectionKey, items: contacts);
+            _sectionMap[sectionKey] = section;
+            _sections.add(section);
+          }
+          // Since the map value points to the same section as the list,
+          // we can add an item for both via the reference.
+          _sectionMap[sectionKey].addItem(contact);
         }
-        // Since the map value points to the same section as the list,
-        // we can add an item for both via the reference.
-        _sectionMap[sectionKey].addItem(contact);
       });
   }
 
