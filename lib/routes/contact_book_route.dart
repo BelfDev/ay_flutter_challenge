@@ -4,7 +4,7 @@ import 'package:ay_flutter_challenge/data/models/models.dart';
 import 'package:ay_flutter_challenge/data/repositories/contact_repository.dart';
 import 'package:ay_flutter_challenge/routes/contact_detail_route.dart';
 import 'package:ay_flutter_challenge/services/contact_search.dart';
-import 'package:ay_flutter_challenge/utils/styles.dart';
+import 'package:ay_flutter_challenge/widgets/fade_in_container.dart';
 import 'package:ay_flutter_challenge/widgets/my_contact_tile.dart';
 import 'package:ay_flutter_challenge/widgets/placeholders/error_placeholder.dart';
 import 'package:ay_flutter_challenge/widgets/search_bar.dart';
@@ -87,7 +87,8 @@ class ContactBookRoute extends StatelessWidget {
                     if (sectionList.isEmpty)
                       return Center(child: CircularProgressIndicator());
 
-                    return _buildGroupedListView(context, sectionList);
+                    return FadeInContainer(
+                        child: _buildGroupedListView(context, sectionList));
                 }
               }),
             );
@@ -117,10 +118,8 @@ class ContactBookRoute extends StatelessWidget {
   }
 
   /// Builds a dummy header for demonstration purposes.
-  Widget _buildGroupedListViewHeader(BuildContext context) {
-    final styles = Styles.of(context);
-    return SliverToBoxAdapter(child: MyContactTile());
-  }
+  Widget _buildGroupedListViewHeader(BuildContext context) =>
+      SliverToBoxAdapter(child: MyContactTile());
 
   /// Builds a dummy footer for demonstration purposes.
   Widget _buildGroupedListViewFooter() => SliverFixedExtentList(
