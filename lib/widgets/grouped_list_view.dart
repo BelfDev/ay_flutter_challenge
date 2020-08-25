@@ -50,7 +50,7 @@ class GroupedListView<S extends ExpandableListSection<T>, T>
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: <Widget>[
-        if (nested) _buildNestedScrollSetup(),
+        if (nested) _buildNestedScrollSetup(context),
         if (_hasHeader) header,
         if (_hasSliverAppBar) sliverAppBar,
         _buildGroupedList(context),
@@ -73,32 +73,33 @@ class GroupedListView<S extends ExpandableListSection<T>, T>
     );
   }
 
-  Widget _buildNestedScrollSetup() => SliverPersistentHeader(
-      pinned: true, floating: true, delegate: _SliverAppBarDelegate());
+  Widget _buildNestedScrollSetup(BuildContext context) {
+    final appBarHeight = MediaQuery.of(context).padding.top + kToolbarHeight;
+    return SliverPersistentHeader(
+        pinned: true,
+        floating: true,
+        delegate: _SliverAppBarDelegate(appBarHeight: appBarHeight));
+  }
 }
 
-// TODO: Find an alternative approach to preserve the sticky effect on nested scroll view
+/// A [SliverPersistentHeaderDelegate] which defines the appearance
+/// of the [SliverPersistentHeader]. This delegate is used to prevent
+/// the [GroupedListView] content from being drawn behind the outer [SliverAppBar].
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  _SliverAppBarDelegate();
+  final double appBarHeight;
 
-  static const double _size = 100;
-
-  @override
-  double get minExtent => _size;
+  _SliverAppBarDelegate({@required this.appBarHeight})
+      : assert(appBarHeight != null);
 
   @override
-  double get maxExtent => _size;
+  double get minExtent => appBarHeight;
 
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return SizedBox(
-      height: _size,
-    );
-  }
+  double get maxExtent => appBarHeight;
 
   @override
-  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
-    return false;
-  }
+  Widget build(_, __, ___) => SizedBox(height: appBarHeight);
+
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) => false;
 }
