@@ -1,10 +1,10 @@
-<h1 align="center">
+<h2 align="center">
   <br>
   <img width="200" src=".github/project-logo.png">
   <br>
-  <h2 align="center">Flutter Coding Challenge</h2>
+  Flutter Coding Challenge
   <br>
-</h1>
+</h2>
 
 
 ## Getting Started
