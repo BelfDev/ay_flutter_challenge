@@ -57,7 +57,7 @@ class ContactBookRoute extends StatelessWidget {
 
   Widget _buildSearchBar() => SearchBar<Contact>(
       padding:
-          const EdgeInsets.fromLTRB(16.0, _barExpandedHeight - 8, 16.0, 0.0),
+          const EdgeInsets.fromLTRB(16.0, _barExpandedHeight - 16, 16.0, 0.0),
       searchDelegate: ContactSearchDelegate(contactRepository),
       onResult: _onSearchResult);
 

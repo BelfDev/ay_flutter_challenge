@@ -29,9 +29,6 @@ class FlexibleSliverAppBar extends StatelessWidget {
       pinned: true,
       expandedHeight: expandedHeight,
       forceElevated: forceElevated,
-//      title: Text(title),
-//      bottom: PreferredSize(
-//          preferredSize: const Size.fromHeight(48.0), child: searchBar),
       flexibleSpace: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
         final collapsed = constraints.biggest.height <= kToolbarHeight * 2;
@@ -44,7 +41,7 @@ class FlexibleSliverAppBar extends StatelessWidget {
           collapseMode: CollapseMode.pin,
           title: SafeArea(child: Text(title)),
           titlePadding:
-              collapsed ? null : EdgeInsets.only(left: 16, bottom: 64),
+              collapsed ? null : EdgeInsets.only(left: 16, bottom: 72),
           centerTitle: collapsed ? true : false,
 //          background: Stack(
 //            fit: StackFit.expand,

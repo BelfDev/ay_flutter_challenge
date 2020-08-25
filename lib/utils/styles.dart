@@ -26,7 +26,11 @@ class Styles {
   /// Returns the App's divider color.
   Color get dividerColor => ThemeColors.greyShade250;
 
+  /// Returns the App's placeholder icon color.
   Color get placeholderIconColor => ThemeColors.lightGrey;
+
+  /// Returns the App's search bar color.
+  Color get searchBarColor => ThemeColors.smoothWhite;
 }
 
 abstract class _ThemedStyle {
@@ -53,5 +57,8 @@ class _AppTexts extends _ThemedStyle {
   TextStyle get itemTile => theme.textTheme.bodyText1;
 
   TextStyle get error =>
+      theme.textTheme.bodyText1.apply(color: ThemeColors.grey);
+
+  TextStyle get hint =>
       theme.textTheme.bodyText1.apply(color: ThemeColors.grey);
 }
