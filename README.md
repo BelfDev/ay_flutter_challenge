@@ -6,6 +6,8 @@
   <br>
 </h1>
 
+[![Downloads](.github/project-logo.png)]()
+
 
 ## Getting Started
 
