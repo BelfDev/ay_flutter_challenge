@@ -2,8 +2,7 @@
   <br>
   <img width="200" src=".github/project-logo.png">
   <br>
-  <br>
-  <h2>Flutter Coding Challenge</h2>
+  <h2 align="center">Flutter Coding Challenge</h2>
   <br>
 </h1>
 
