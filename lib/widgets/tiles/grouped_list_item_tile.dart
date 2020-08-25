@@ -16,8 +16,6 @@ class GroupedListItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(title);
-
     final styles = Styles.of(context);
     return SafeArea(
         top: false,
