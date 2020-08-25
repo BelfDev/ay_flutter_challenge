@@ -3,6 +3,11 @@ extension StringOperations on String {
   /// Returns true if this [String] contains non-empty content.
   bool get isNotNullNorEmpty => this != null && this.isNotEmpty;
 
+  /// Returns true if this the first character from this [String] is a punctuation character.
+  bool get startsWithPunctuation => this.isNotNullNorEmpty
+      ? this[0].startsWith(RegExp(r'[.!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]'))
+      : false;
+
   /// Returns the [String] with capitalized first character.
   String toCapitalCase() {
     if (this == null) {

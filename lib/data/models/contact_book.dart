@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:ay_flutter_challenge/data/models/sanitized_entry.dart';
 import 'package:ay_flutter_challenge/utils/data_sanitizer.dart';
 import 'package:ay_flutter_challenge/utils/exceptions/exceptions.dart';
+import 'package:ay_flutter_challenge/utils/extensions/string_operations_extension.dart';
 
 import 'contact.dart';
 import 'section.dart';
@@ -20,7 +21,7 @@ class ContactBook {
   /// Adversarial inputs are not included in the [ContactBook].
   /// throws an [InvalidDataException] if all entries are invalid.
   ContactBook.from(List<String> entries) {
-    final modifiableEntries = List.from(entries);
+    final modifiableEntries = List<String>.from(entries);
 
     modifiableEntries
       // Sorts the given contact entries
@@ -34,7 +35,9 @@ class ContactBook {
             DataSanitizer.sanitizeContactEntry(rawEntry);
         if (entry.isValid) {
           final Contact contact = Contact.fromFullName(fullName: entry.value);
-          final sectionKey = contact.firstNameInitial;
+          // Adds the entry to the '#' section in case it does not start with letters
+          final sectionKey =
+              rawEntry.startsWithPunctuation ? '#' : contact.firstNameInitial;
 
           if (!_sectionMap.containsKey(sectionKey)) {
             final contacts = List<Contact>();
