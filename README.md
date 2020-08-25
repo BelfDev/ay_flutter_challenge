@@ -3,7 +3,7 @@
 Contacts App made as part of About You Flutter challenge.
 
 <p align="center">
-<img src=".github/project-logo.png">
+<img width="200" src=".github/project-logo.png">
 </p>
 
 ## Getting Started
