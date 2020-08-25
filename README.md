@@ -6,8 +6,7 @@
   <br>
 </h1>
 
-[![Downloads](.github/project-logo.png)](http://pepy.tech/count/stronghold)
-
+![iOS result](.github/ios-app-result.png "ios-result") ![Android result](.github/android-app-result.png "android-result")
 
 ## Getting Started
 
