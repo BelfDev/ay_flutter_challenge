@@ -2,6 +2,10 @@
 
 Contacts App made as part of About You Flutter challenge.
 
+<p align="center">
+<img src=".github/project-logo.png">
+</p>
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
