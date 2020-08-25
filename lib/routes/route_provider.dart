@@ -1,13 +1,15 @@
 import 'package:ay_flutter_challenge/configs/app_config.dart';
+import 'package:ay_flutter_challenge/data/repositories/contact_repository.dart';
 import 'package:ay_flutter_challenge/routes/contact_book_route.dart';
 import 'package:ay_flutter_challenge/routes/contact_detail_route.dart';
 import 'package:flutter/material.dart';
 
-// TODO: Inject repositories and blocs with the Provider API.
 /// A class that registers and generates App [Route]s
 class RouteProvider {
   static final Map<String, WidgetBuilder> _routes = {
-    ContactBookRoute.id: (context) => ContactBookRoute(),
+    ContactBookRoute.id: (context) => ContactBookRoute(
+          contactRepository: ContactRepository(),
+        ),
     ContactDetailRoute.id: (context) => ContactDetailRoute(),
   };
 
