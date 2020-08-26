@@ -79,3 +79,21 @@ Notes:
 - Only the 'sticky' functionality provided by `sticky_and_expandable_list` is used. This project drifts a bit away from the basic use-case because the `CustomScrollView` is nested inside a `NestedScrollView`.
 - `with_bloc` and `state_queue` were chosen because they are in-house depencies used by About You to handle state management. An alternative library would be **felangel**`s [bloc](https://github.com/felangel/bloc/).
 - [Redux](https://pub.dev/packages/redux) was not chosen for state management because it requires far [more boilerplate code](https://www.reddit.com/r/reactjs/comments/7dk3s8/is_there_a_way_to_reduce_boilerplate_for_redux/) and the application scope is minimal. Redux would be [more adequate](https://redux.js.org/faq/general#when-should-i-learn-redux) in large-scale projects with 6+ developers. Personally, I prefer to **distribute the application state** according to its relevant scope instead of concentrating everything in a global store.
+
+### Highlights
+
+- Layered architecture; presentation detached from business logic
+- Use of BLoCs for state management
+- Single source of truth for fetching data via the repository pattern
+- In-memory cache simulating local storage persistence
+- Remote data source simulation
+- Route declaration and dependency injection via the `RouteProvider`
+- Lazy loading widgets when scroll through conent
+- Separation of the app bar widget by using a `NestedScrollView`
+- Support for `header` and `footer` slivers in the `GroupedListView`
+- Users get visual feedback for `progress`, `error`, and `success` states
+- App theming via `AppTheme` and `Styles`
+- Data sanitization 
+- Search capabilities with real-time suggestions
+- The UI is compatible with any smartphone screen size and orientation
+- Thorough documentation
