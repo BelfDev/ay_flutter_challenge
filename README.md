@@ -57,7 +57,7 @@ The graphical user interface and experience were tailored with the [Material](ht
 As [uncle Bob](https://books.google.com.br/books?id=_i6bDeoCQzsC&printsec=frontcover&dq=inauthor:%22Robert+C.+Martin%22&hl=pt-BR&sa=X&ved=2ahUKEwjy-tSez7frAhXsLLkGHU41CLMQ6AEwAHoECAQQAg#v=onepage&q&f=false) said, **even bad code can function**. To make sure it is also clean, this project's code is divided into four layers: `Presentation`, `Business Logic`, `Repository`, and `Data Source`.
 
 - **Presentation layer** => Contains reactive [widgets](https://flutter.dev/docs/development/ui/widgets) which draw visual components to the screen (e.g. `MyContactTile`).
-- **Business Logic** => Is implemented by using the [BLoC](https://www.didierboelens.com/2018/08/reactive-programming-streams-bloc/) design pattern, where a middleware listens to streams of events and output states mapped according to some business logic.
+- **Business Logic** => Is implemented via the [BLoC](https://www.didierboelens.com/2018/08/reactive-programming-streams-bloc/) design pattern, where a middleware listens to streams of events and output states mapped according to some business logic.
 - **Repository** => Encapsualtes data access logic and exposes a single source of truth. Data can be retrieved from either a local or remote source.
 - **Data Source** => Persistence or networking logic to retrieve data.
 
@@ -65,23 +65,17 @@ As [uncle Bob](https://books.google.com.br/books?id=_i6bDeoCQzsC&printsec=frontc
 <img width="400" src=".github/frontend-architecture.png">
 </p>
 
+### Dependencies
 
-> “It is not enough for code to work.”
-As uncle Bob said, **even bad code can function**. To make it also clean, this project's code is
+| Dependency  | Version | Category  | Purpose |
+| ------------- | :---:  | :---:  | ------------- |
+| [cupertino_icons](https://pub.dev/packages/cupertino_icons)  | ^0.1.3  | UI  | use iOS icons  |
+| [sticky_and_expandable_list](https://pub.dev/packages/sticky_and_expandable_list)  | ^0.2.1  | UI  | improve the experience with a persistent list section header on scroll  |
+| [with_bloc](https://pub.dev/packages/with_bloc)  | ^2.0.0  | State management  | use AY tech and facilitate injection of blocs  |
+| [state_queue](https://pub.dev/packages/state_queue)  | ^2.0.0  | State management  | use AY tech and faciliate the flow of [streams](https://dart.dev/tutorials/language/streams)  |
+| [url_launcher](https://pub.dev/packages/url_launcher)  | ^5.5.0  | Capability  | send the user to an external url on the browser  |
 
-The app's primary goal is to **display a list of contacts** provided by either a local or remote data source. Users also have the ability to **search** for specific contacts from the list or tap on tiles to **access further information** about their contacts.
-
-The graphical user interface and experience were tailored with the [Material](https://material.io/design/foundation-overview) design system in mind. Rather than adapting interface components to each platform's native look, a customized app theme was created to convey a unified look and feel of the *product*'s brand. Certain platform-defining characteristics were preserved (e.g. back button icons and transitions).
-
-
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Notes:
+- With `sticky_and_expandable_list`, the 'sticky' functionality is used. Its use drifts away from the basic use-case because the `CustomScrollView` is nested inside a `NestedScrollView`.
+- `with_bloc` and `state_queue` were chosen because these are in-house depencies used by About You to handle state management. An alternative library would be **felangel**`s [bloc](https://github.com/felangel/bloc/).
+- [Redux](https://pub.dev/packages/redux) was not chosen for state management because it requires far [more boilerplate code](https://www.reddit.com/r/reactjs/comments/7dk3s8/is_there_a_way_to_reduce_boilerplate_for_redux/) and the application scope is minimal. Redux would be [more adequate](https://redux.js.org/faq/general#when-should-i-learn-redux) in large-scale projects with 6+ developers. Personally, I prefer to **distribute the application state** according to their relevant scope instead of concentrating everything in a global store.
