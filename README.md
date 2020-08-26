@@ -93,7 +93,18 @@ Notes:
 - Support for `header` and `footer` slivers in the `GroupedListView`
 - Users get visual feedback for `progress`, `error`, and `success` states
 - App theming via `AppTheme` and `Styles`
-- Data sanitization 
+- Data sanitization
 - Search capabilities with real-time suggestions
 - The UI is compatible with any smartphone screen size and orientation
 - Thorough documentation
+
+## Questions
+
+> Describe why a Scroll to index API is not as straightforward with normal ListView or Sliver widgets in the README of the project
+
+In flutter, scroll to index is not as straightforward with `ListView` or `Slivers` because these widgets may contain items with distinct measures. Moreover, these items are usually lazy loaded, which means they won't be rendered [until they are 200 pixels close](https://youtu.be/Mz3kHQxBjGg?t=2091) from the active viewport.
+
+This [issue](https://github.com/flutter/flutter/issues/12319) is widely discussed by community members in flutter's repo. Some alternatives to achieving `scrollToIndex` are:
+
+- Replacing the `ListView` with a `SingleChilScrollView` and wrapping the children into a `Column` -- only for pre-defined and small lists. More details [here](https://stackoverflow.com/questions/49153087/flutter-scrolling-to-a-widget-in-listview).
+- Incorporate the `scrollable_positioned_list` library [published by google](https://pub.dev/packages/scrollable_positioned_list). Keep in mind *This is not an officially supported Google product.*
