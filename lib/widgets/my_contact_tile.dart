@@ -1,3 +1,4 @@
+import 'package:ay_flutter_challenge/configs/app_localization.dart';
 import 'package:ay_flutter_challenge/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -49,7 +50,7 @@ class _MyContactTileState extends State<MyContactTile> {
         style: styles.texts.myCardTitle,
       ),
       subtitle: Text(
-        'Author',
+        AppLocalizations.of(context).contactRoute.author,
         style: styles.texts.myCardSubtitle,
       ),
       onTap: () => _launchURL(MyContactTile._linkedInUrl),

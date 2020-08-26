@@ -1,3 +1,4 @@
+import 'package:ay_flutter_challenge/configs/app_localization.dart';
 import 'package:ay_flutter_challenge/configs/configs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,7 +7,6 @@ import 'package:flutter/services.dart';
 /// of the Contact Detail screen.
 class ContactDetailRoute extends StatelessWidget {
   static const String id = '/contact-detail';
-  static const String _routeTitle = 'Contact Detail';
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class ContactDetailRoute extends StatelessWidget {
     final theme = AppTheme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(_routeTitle),
+        title: Text(AppLocalizations.of(context).detailRoute.title),
       ),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.dark,

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:ay_flutter_challenge/blocs/blocs.dart';
 import 'package:ay_flutter_challenge/blocs/state_status.dart';
+import 'package:ay_flutter_challenge/configs/app_localization.dart';
 import 'package:ay_flutter_challenge/configs/configs.dart';
 import 'package:ay_flutter_challenge/data/models/models.dart';
 import 'package:ay_flutter_challenge/data/repositories/contact_repository.dart';
@@ -17,14 +18,14 @@ typedef _ResultTapCallback = Function(Contact contact);
 /// a [SearchDelegate] targeting the 'search for contacts' use-case.
 /// [SearchBloc]s are used to access search business logic.
 class ContactSearchDelegate extends SearchDelegate<Contact> {
-  static const String _hintLabel = "Type in a contact's name";
-
+  final BuildContext _context;
   final ContactRepository _contactRepository;
 
-  ContactSearchDelegate(this._contactRepository) : super();
+  ContactSearchDelegate(this._context, this._contactRepository) : super();
 
   @override
-  String get searchFieldLabel => _hintLabel;
+  String get searchFieldLabel =>
+      AppLocalizations.of(_context).searchRoute.instruction;
 
   @override
   ThemeData appBarTheme(BuildContext context) {
