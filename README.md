@@ -74,6 +74,7 @@ As [uncle Bob](https://books.google.com.br/books?id=_i6bDeoCQzsC&printsec=frontc
 | [with_bloc](https://pub.dev/packages/with_bloc)  | ^2.0.0  | State management  | use AY tech and facilitate injection of blocs  |
 | [state_queue](https://pub.dev/packages/state_queue)  | ^2.0.0  | State management  | use AY tech and faciliate the flow of [streams](https://dart.dev/tutorials/language/streams)  |
 | [url_launcher](https://pub.dev/packages/url_launcher)  | ^5.5.0  | Capability  | send the user to an external url on the browser  |
+| [equatable](https://pub.dev/packages/equatable)  | ^1.2.4  | Capability  | facilitate the comparison between objects  |
 
 Notes:
 - Only the 'sticky' functionality provided by `sticky_and_expandable_list` is used. This project drifts a bit away from the basic use-case because the `CustomScrollView` is nested inside a `NestedScrollView`.
