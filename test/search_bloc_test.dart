@@ -62,7 +62,7 @@ void main() {
 
       final successful = searchBloc.addToContactHistory(newContact);
 
-      expect(successful, true);
+      expect(successful, false);
     });
   });
 }
