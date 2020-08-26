@@ -9,6 +9,8 @@ class ThemeColors {
 
   static const Color greyShade250 = const Color(0xFFDFDFDF);
   static const Color greyShade300 = const Color(0xFFD6D6D6);
+  static const Color greyShade800 = const Color(0xFF424242);
+  static const Color greyShade850 = const Color(0xFF303030);
 
   // White
   static const Color white = const Color(0xFFFFFFFF);
@@ -20,6 +22,7 @@ class ThemeColors {
 
   // Purple
   static const Color purple = const Color(0xFF7C75D1);
+  static const Color darkPurple = const Color(0xFF3A2269);
   static const Color transparentPurple = const Color(0x99323044);
 
   ThemeColors._();

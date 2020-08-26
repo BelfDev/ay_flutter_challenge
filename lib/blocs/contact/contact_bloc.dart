@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:ay_flutter_challenge/blocs/state_status.dart';
 import 'package:ay_flutter_challenge/data/models/models.dart';
 import 'package:ay_flutter_challenge/data/repositories/contact_repository.dart';
+import 'package:equatable/equatable.dart';
 import 'package:state_queue/state_queue.dart';
 
 part 'contact_state.dart';
@@ -24,12 +25,12 @@ class ContactBloc extends StateQueue<ContactState> {
     final completer = Completer();
 
     run((state) async* {
-      ContactBook cachedSections;
+      ContactBook cachedContactBook;
       if (_contactRepository.hasCache) {
-        cachedSections = await _contactRepository.fetchContacts();
+        cachedContactBook = await _contactRepository.fetchContacts();
       }
 
-      yield ContactState.loading(cachedSections?.sections ?? []);
+      yield ContactState.loading(cachedContactBook?.sections ?? []);
 
       final ContactBook contactBook =
           await _contactRepository.fetchContacts(forceRemote: true);

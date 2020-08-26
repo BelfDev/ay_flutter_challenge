@@ -1,7 +1,9 @@
 /// Utility extension which adds convenience operations to the String object.
 extension StringOperations on String {
-  /// Returns true if this [String] contains non-empty content.
-  bool get isNotNullNorEmpty => this != null && this.isNotEmpty;
+  /// Returns true if this the first character from this [String] is a punctuation character.
+  bool get startsWithPunctuation => this.isNotEmpty
+      ? this[0].startsWith(RegExp(r'[.!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]'))
+      : false;
 
   /// Returns the [String] with capitalized first character.
   String toCapitalCase() {
@@ -22,7 +24,10 @@ extension StringOperations on String {
   List<String> splitAtFirstWord() {
     final words = this.split(' ');
     if (words.isNotEmpty) {
-      return [words[0], words.sublist(1)?.join(" ")?.toCapitalCase() ?? ''];
+      return [
+        words[0].toCapitalCase(),
+        words.sublist(1)?.join(" ")?.toCapitalCase() ?? ''
+      ];
     }
     throw ArgumentError("string is empty: $this");
   }

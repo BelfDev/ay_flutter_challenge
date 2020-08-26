@@ -1,5 +1,6 @@
 import 'package:ay_flutter_challenge/blocs/blocs.dart';
 import 'package:ay_flutter_challenge/blocs/state_status.dart';
+import 'package:ay_flutter_challenge/configs/app_localizations.dart';
 import 'package:ay_flutter_challenge/data/models/models.dart';
 import 'package:ay_flutter_challenge/data/repositories/contact_repository.dart';
 import 'package:ay_flutter_challenge/routes/contact_detail_route.dart';
@@ -18,7 +19,6 @@ import 'package:with_bloc/with_bloc.dart';
 class ContactBookRoute extends StatelessWidget {
   static const String id = '/contact-book';
   static const double _barExpandedHeight = 142;
-  static const String _routeTitle = 'Contacts';
 
   ContactBookRoute({Key key, @required this.contactRepository})
       : assert(contactRepository != null),
@@ -49,7 +49,7 @@ class ContactBookRoute extends StatelessWidget {
         SliverOverlapAbsorber(
           handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
           sliver: FlexibleSliverAppBar(
-              title: _routeTitle,
+              title: AppLocalizations.of(context).contactRoute.title,
               forceElevated: innerBoxIsScrolled,
               expandedHeight: _barExpandedHeight,
               searchBar: _buildSearchBar(context)),
@@ -61,7 +61,7 @@ class ContactBookRoute extends StatelessWidget {
         top: false,
         bottom: false,
         child: SearchBar<Contact>(
-            searchDelegate: ContactSearchDelegate(contactRepository),
+            searchDelegate: ContactSearchDelegate(context, contactRepository),
             onResult: _onSearchResult),
       );
 

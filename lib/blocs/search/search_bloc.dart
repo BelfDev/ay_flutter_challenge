@@ -4,6 +4,7 @@ import 'package:ay_flutter_challenge/blocs/state_status.dart';
 import 'package:ay_flutter_challenge/data/models/contact_book.dart';
 import 'package:ay_flutter_challenge/data/models/models.dart';
 import 'package:ay_flutter_challenge/data/repositories/contact_repository.dart';
+import 'package:equatable/equatable.dart';
 import 'package:state_queue/state_queue.dart';
 
 part 'search_state.dart';

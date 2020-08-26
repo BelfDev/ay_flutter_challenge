@@ -1,10 +1,11 @@
 import 'package:ay_flutter_challenge/utils/extensions/string_operations_extension.dart';
+import 'package:equatable/equatable.dart';
 
 /// A data model class representing the Contact entity.
 /// This model contains convenience properties to access
 /// the contact's full name, first name's initial, or
 /// last name's initial.
-class Contact implements Comparable<Contact> {
+class Contact extends Equatable implements Comparable<Contact> {
   String _fullName;
   String _firstName;
   String _lastName;
@@ -21,11 +22,10 @@ class Contact implements Comparable<Contact> {
   /// Constructs a Contact by splitting the full name into first and last names.
   /// The first name is the first word at the provided full name.
   /// The last name is everything that proceeds the first word.
-  Contact.fromFullName({String fullName}) : assert(fullName != null) {
-    final names = fullName.splitAtFirstWord();
+  Contact.fromFullName(this._fullName) {
+    final names = _fullName.splitAtFirstWord();
     _firstName = names[0];
     _lastName = names[1];
-    _fullName = fullName;
   }
 
   /// Returns the original full name passed in the constructor or
@@ -43,4 +43,7 @@ class Contact implements Comparable<Contact> {
 
   @override
   String toString() => this.fullName;
+
+  @override
+  List<Object> get props => [_fullName];
 }

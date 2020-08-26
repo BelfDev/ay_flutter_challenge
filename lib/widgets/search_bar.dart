@@ -1,3 +1,4 @@
+import 'package:ay_flutter_challenge/configs/app_localizations.dart';
 import 'package:ay_flutter_challenge/utils/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,6 @@ typedef SearchResult<T> = Function(BuildContext context, T result);
 /// This widget is typically part of a [FlexibleSliverAppBar].
 class SearchBar<T> extends StatelessWidget {
   static const double _height = 40;
-  static const String _placeholderHint = 'Tap to search contacts';
 
   const SearchBar(
       {Key key, this.searchDelegate, this.onResult, this.borderRadius})
@@ -49,7 +49,7 @@ class SearchBar<T> extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  _placeholderHint,
+                  AppLocalizations.of(context).searchRoute.hint,
                   style: styles.texts.hint,
                 )
               ],

@@ -2,7 +2,7 @@ part of 'search_bloc.dart';
 
 /// Defines every possible contact state which
 /// is typically emitted by the [SearchBloc].
-class SearchState<T> {
+class SearchState<T> extends Equatable {
   final List<T> results;
   final StateStatus status;
 
@@ -29,7 +29,10 @@ class SearchState<T> {
       );
 
   @override
+  List<Object> get props => [status, results];
+
+  @override
   String toString() {
-    return runtimeType.toString();
+    return status.toString();
   }
 }

@@ -2,7 +2,7 @@ part of 'contact_bloc.dart';
 
 /// Defines every possible contact state which
 /// is typically emitted by the [ContactBloc].
-class ContactState {
+class ContactState extends Equatable {
   final StateStatus status;
   final List<Section<Contact>> results;
 
@@ -29,7 +29,10 @@ class ContactState {
       );
 
   @override
+  List<Object> get props => [status, results];
+
+  @override
   String toString() {
-    return runtimeType.toString();
+    return status.toString();
   }
 }

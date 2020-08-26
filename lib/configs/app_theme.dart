@@ -15,6 +15,7 @@ class AppTheme {
   static ThemeData of(BuildContext context) {
     final baseTheme = Theme.of(context);
     return baseTheme.copyWith(
+      brightness: Brightness.light,
       primaryColor: ThemeColors.smoothBlack,
       accentColor: ThemeColors.purple,
       cupertinoOverrideTheme: CupertinoThemeData(
@@ -30,15 +31,44 @@ class AppTheme {
       ),
       textTheme: TextTheme(
         headline1: TextStyle(
-          color: ThemeColors.darkGray,
-          fontSize: _h1,
-        ),
+            color: ThemeColors.darkGray,
+            fontSize: _h1,
+            fontWeight: FontWeight.w200),
         headline2: TextStyle(
             color: ThemeColors.smoothBlack,
             fontSize: _h2,
             fontWeight: FontWeight.w600),
         bodyText1: TextStyle(
             color: ThemeColors.smoothBlack,
+            fontSize: _b1,
+            fontWeight: FontWeight.w400),
+      ),
+    );
+  }
+
+  static ThemeData darkOf(BuildContext context) {
+    final baseTheme = AppTheme.of(context);
+    return baseTheme.copyWith(
+      brightness: Brightness.dark,
+      primaryColor: ThemeColors.smoothWhite,
+      scaffoldBackgroundColor: ThemeColors.smoothBlack,
+      inputDecorationTheme: InputDecorationTheme(
+        hintStyle: TextStyle(fontSize: _h2, color: ThemeColors.greyShade250),
+      ),
+      appBarTheme: AppBarTheme(
+        color: ThemeColors.darkPurple,
+      ),
+      textTheme: TextTheme(
+        headline1: TextStyle(
+          color: ThemeColors.smoothWhite,
+          fontSize: _h1,
+        ),
+        headline2: TextStyle(
+            color: ThemeColors.smoothWhite,
+            fontSize: _h2,
+            fontWeight: FontWeight.w600),
+        bodyText1: TextStyle(
+            color: ThemeColors.smoothWhite,
             fontSize: _b1,
             fontWeight: FontWeight.w400),
       ),
