@@ -42,13 +42,32 @@
 
 ### Design
 
-The app's primary goal is to **display a list of contacts** provided by either a local or remote data source. Users also have the ability to **search** for specific contacts from the list or tap on tiles to **access further information** about their contacts.
+The app's primary goal is to **display a list of contacts** provided by either a local or remote data source. Users also have the ability to **search** for specific contacts from the list or tap on tiles to **access further information**.
 
 The graphical user interface and experience were tailored with the [Material](https://material.io/design/foundation-overview) design system in mind. Rather than adapting interface components to each platform's native look, a customized app theme was created to convey a unified look and feel of the *product*'s brand. Certain platform-defining characteristics were preserved (e.g. back button icons and transitions).
 
 <p align="middle">
 <img width="400" src=".github/theme-overview.png">
 </p>
+
+### Architecture
+
+> “It is not enough for code to work.”
+
+As [uncle Bob](https://books.google.com.br/books?id=_i6bDeoCQzsC&printsec=frontcover&dq=inauthor:%22Robert+C.+Martin%22&hl=pt-BR&sa=X&ved=2ahUKEwjy-tSez7frAhXsLLkGHU41CLMQ6AEwAHoECAQQAg#v=onepage&q&f=false) said, **even bad code can function**. To make sure it is also clean, this project's code is divided into four layers: `Presentation`, `Business Logic`, `Repository`, and `Data Source`.
+
+- **Presentation layer** => Contains reactive [widgets](https://flutter.dev/docs/development/ui/widgets) which draw visual components to the screen (e.g. `MyContactTile`).
+- **Business Logic** => Is implemented by using the [BLoC](https://www.didierboelens.com/2018/08/reactive-programming-streams-bloc/) design pattern, where a middleware listens to streams of events and output states mapped according to some business logic.
+- **Repository** => Encapsualtes data access logic and exposes a single source of truth. Data can be retrieved from either a local or remote source.
+- **Data Source** => Persistence or networking logic to retrieve data.
+
+<p align="middle">
+<img width="400" src=".github/frontend-architecture.png">
+</p>
+
+
+> “It is not enough for code to work.”
+As uncle Bob said, **even bad code can function**. To make it also clean, this project's code is
 
 The app's primary goal is to **display a list of contacts** provided by either a local or remote data source. Users also have the ability to **search** for specific contacts from the list or tap on tiles to **access further information** about their contacts.
 
