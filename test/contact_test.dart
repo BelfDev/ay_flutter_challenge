@@ -15,7 +15,7 @@ void main() {
     test(
         'when constructed with full names should infer first and last name initials',
         () {
-      final Contact contact = Contact.fromFullName(fullName: 'Joe Doe');
+      final contact = Contact.fromFullName('Joe Doe');
 
       expect(contact.firstNameInitial, 'J');
       expect(contact.lastNameInitial, 'D');
@@ -24,8 +24,8 @@ void main() {
     test(
         'when constructed with large full names should consider the last name as everything after the first word',
         () {
-      final Contact contact = Contact.fromFullName(
-          fullName: 'Joe Doe da Silva Pinto Churchill Baggins Bond II');
+      final contact = Contact.fromFullName(
+          'Joe Doe da Silva Pinto Churchill Baggins Bond II');
 
       expect(contact.firstNameInitial, 'J');
       expect(contact.lastNameInitial, 'D');

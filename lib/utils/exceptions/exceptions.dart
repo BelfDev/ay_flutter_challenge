@@ -1,5 +1,7 @@
+import 'package:equatable/equatable.dart';
+
 /// Custom [Exception] to indicate invalid local data.
-class InvalidDataException<T> implements Exception {
+class InvalidDataException<T> extends Equatable implements Exception {
   final String message;
   final T data;
 
@@ -9,4 +11,7 @@ class InvalidDataException<T> implements Exception {
   String toString() {
     return '$message\nData:$data';
   }
+
+  @override
+  List<Object> get props => [message, data];
 }
