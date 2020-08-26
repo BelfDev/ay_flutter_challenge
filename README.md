@@ -97,6 +97,9 @@ Notes:
 - Search capabilities with real-time suggestions
 - The UI is compatible with any smartphone screen size and orientation
 - Thorough documentation
+- Unit tested
+- Localized (en, de, pt, es)
+- Dark mode
 
 ## Questions
 
