@@ -46,8 +46,9 @@ The app's primary goal is to **display a list of contacts** provided by either a
 
 The graphical user interface and experience were tailored with the [Material](https://material.io/design/foundation-overview) design system in mind. Rather than adapting interface components to each platform's native look, a customized app theme was created to convey a unified look and feel of the *product*'s brand. Certain platform-defining characteristics were preserved (e.g. back button icons and transitions).
 
-<img width="200" src=".github/theme-overview.png">
-
+<p align="middle">
+<img width="400" src=".github/theme-overview.png">
+</p>
 
 The app's primary goal is to **display a list of contacts** provided by either a local or remote data source. Users also have the ability to **search** for specific contacts from the list or tap on tiles to **access further information** about their contacts.
 
