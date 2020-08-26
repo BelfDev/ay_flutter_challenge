@@ -1,6 +1,6 @@
 import 'package:ay_flutter_challenge/blocs/blocs.dart';
 import 'package:ay_flutter_challenge/blocs/state_status.dart';
-import 'package:ay_flutter_challenge/configs/app_localization.dart';
+import 'package:ay_flutter_challenge/configs/app_localizations.dart';
 import 'package:ay_flutter_challenge/data/models/models.dart';
 import 'package:ay_flutter_challenge/data/repositories/contact_repository.dart';
 import 'package:ay_flutter_challenge/routes/contact_detail_route.dart';

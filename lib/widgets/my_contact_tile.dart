@@ -1,4 +1,4 @@
-import 'package:ay_flutter_challenge/configs/app_localization.dart';
+import 'package:ay_flutter_challenge/configs/app_localizations.dart';
 import 'package:ay_flutter_challenge/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';

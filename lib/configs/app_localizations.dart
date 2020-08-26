@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// Localized resources definition.
+/// For now, the app supports English, German, Portuguese, and Spanish.
 class AppLocalizations {
   AppLocalizations(this.locale);
 
