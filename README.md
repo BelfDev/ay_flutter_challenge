@@ -34,11 +34,24 @@
 - [x] There should be the ability to show widgets on the top and below the list
     - For this challenge, we only want to inject a vertical list of buttons
 - [x] A search field should be provided to filter down the list
-    - When a search is active, the additional widgets should be hidden
+    - [x] When a search is active, the additional widgets should be hidden
 - [x] Describe why a Scroll to index API is not as straightforward with normal `ListView` or `Sliver` widgets in the README of the project
 - [x] Please finish your coding challenge with a short README outlining your thinking behind the implementation and any open issues you would want to explore if there were more time.
 
-## Getting Started
+## Implementation
+
+### Design
+
+The app's primary goal is to **display a list of contacts** provided by either a local or remote data source. Users also have the ability to **search** for specific contacts from the list or tap on tiles to **access further information** about their contacts.
+
+The graphical user interface and experience were tailored with the [Material](https://material.io/design/foundation-overview) design system in mind. Rather than adapting interface components to each platform's native look, a customized app theme was created to convey a unified look and feel of the *product*'s brand. Certain platform-defining characteristics were preserved (e.g. back button icons and transitions).
+
+<img width="200" src=".github/theme-overview.png">
+
+
+The app's primary goal is to **display a list of contacts** provided by either a local or remote data source. Users also have the ability to **search** for specific contacts from the list or tap on tiles to **access further information** about their contacts.
+
+The graphical user interface and experience were tailored with the [Material](https://material.io/design/foundation-overview) design system in mind. Rather than adapting interface components to each platform's native look, a customized app theme was created to convey a unified look and feel of the *product*'s brand. Certain platform-defining characteristics were preserved (e.g. back button icons and transitions).
 
 
 
