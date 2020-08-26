@@ -112,3 +112,19 @@ This [issue](https://github.com/flutter/flutter/issues/12319) is widely discusse
 
 - Replacing the `ListView` with a `SingleChilScrollView` and wrapping the children into a `Column` -- only for pre-defined and small lists. More details [here](https://stackoverflow.com/questions/49153087/flutter-scrolling-to-a-widget-in-listview).
 - Incorporate the `scrollable_positioned_list` library [published by google](https://pub.dev/packages/scrollable_positioned_list). Keep in mind *This is not an officially supported Google product.*
+
+## Running the project
+
+This project requires flutter to be installed in your machine. If you don't already have it, please follow this amazing official [guide](https://flutter.dev/docs/get-started/install). Once you have flutter, all you need to do is:
+1. Open an Android or iOS simulator
+2. Clone this repo to somewhere in your machine (Let's say... `myProjectFolder`)
+3. Go to you `myProjectFolder`, then go to the challenge's folder
+```bash
+cd ay_flutter_challenge
+````
+4. Run the project!
+```bash
+flutter run
+```
+
+*Thanks for the challenge! It's been a lot of fun* ☺️
