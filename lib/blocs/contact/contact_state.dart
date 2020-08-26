@@ -29,7 +29,7 @@ class ContactState extends Equatable {
       );
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [status, results];
 
   @override
   String toString() {

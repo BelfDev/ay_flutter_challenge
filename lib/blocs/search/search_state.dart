@@ -29,10 +29,10 @@ class SearchState<T> extends Equatable {
       );
 
   @override
-  String toString() {
-    return runtimeType.toString();
-  }
+  List<Object> get props => [status, results];
 
   @override
-  List<Object> get props => [];
+  String toString() {
+    return status.toString();
+  }
 }
