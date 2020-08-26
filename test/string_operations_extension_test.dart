@@ -1,11 +1,7 @@
 import 'package:ay_flutter_challenge/utils/extensions/string_operations_extension.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 
 void main() {
-  setUp(() {});
-
-  tearDown(() {});
-
   group('StringOperations', () {
     test(
         'startsWithPunctuation returns true if the first character is a punctuation',

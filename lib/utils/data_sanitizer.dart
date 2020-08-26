@@ -17,12 +17,13 @@ class DataSanitizer {
     final foundIssues = Set<_InputIssue>();
     // Check if entry is null
     if (entry == null) foundIssues.add(_InputIssue.nullEntry);
+
     // Check if entry is empty
-    if (entry.isEmpty || entry.trim().length == 0)
+    if (entry != null && (entry.isEmpty || entry.trim().length == 0))
       foundIssues.add(_InputIssue.emptyEntry);
 
+    final sanitizedValue = entry?.trim();
     final isValid = foundIssues.isEmpty;
-    final sanitizedValue = entry.trim();
 
     return SanitizedEntry<String>(isValid: isValid, value: sanitizedValue);
   }
