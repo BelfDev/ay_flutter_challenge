@@ -28,8 +28,12 @@ dependencies:
 
   # Custom capabilities
   url_launcher: ^5.5.0
+  equatable: ^1.2.4
 
 dev_dependencies:
+  test: ^1.15.2
+  mockito: ^4.1.1
+
   flutter_test:
     sdk: flutter
 

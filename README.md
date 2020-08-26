@@ -102,7 +102,7 @@ Notes:
 
 > Describe why a Scroll to index API is not as straightforward with normal ListView or Sliver widgets in the README of the project
 
-In flutter, scroll to index is not as straightforward with `ListView` or `Slivers` because these widgets may contain items with distinct measures. Moreover, these items are usually lazy loaded, which means they won't be rendered [until they are 200 pixels close](https://youtu.be/Mz3kHQxBjGg?t=2091) from the active viewport.
+In Flutter, scroll to index is not as straightforward with `ListView` or `Slivers` because these widgets may contain items with distinct measures. Moreover, these items are usually lazy loaded, which means they won't be rendered [until they are 200 pixels close](https://youtu.be/Mz3kHQxBjGg?t=2091) from the active viewport.
 
 This [issue](https://github.com/flutter/flutter/issues/12319) is widely discussed by community members in flutter's repo. Some alternatives to achieving `scrollToIndex` are:
 
