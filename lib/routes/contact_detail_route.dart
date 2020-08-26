@@ -24,7 +24,7 @@ class ContactDetailRoute extends StatelessWidget {
           child: Center(
               child: Text(
             title,
-            style: theme.textTheme.headline1,
+            style: theme.textTheme.headline1.apply(color: theme.accentColor),
           )),
         ),
       ),

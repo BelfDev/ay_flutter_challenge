@@ -21,6 +21,7 @@ class AppContainer extends StatelessWidget {
     return MaterialApp(
       title: AppConfig.appTitle,
       theme: AppTheme.of(context),
+      darkTheme: AppTheme.darkOf(context),
       localizationsDelegates: [
         const AppLocalizationDelegate(),
         GlobalMaterialLocalizations.delegate,

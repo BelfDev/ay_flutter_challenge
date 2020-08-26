@@ -13,7 +13,7 @@ class Styles {
   /// based on the closest [Theme] instance that encloses the given
   /// context.
   static Styles of(BuildContext context) {
-    _theme = AppTheme.of(context);
+    _theme = Theme.of(context);
     return Styles._();
   }
 
@@ -24,13 +24,20 @@ class Styles {
   _AppTexts get texts => _AppTexts(_theme);
 
   /// Returns the App's divider color.
-  Color get dividerColor => ThemeColors.greyShade250;
+  Color get dividerColor => _theme.brightness == Brightness.dark
+      ? ThemeColors.greyShade800
+      : ThemeColors.greyShade250;
 
   /// Returns the App's placeholder icon color.
   Color get placeholderIconColor => ThemeColors.lightGrey;
 
   /// Returns the App's search bar color.
   Color get searchBarColor => ThemeColors.smoothWhite;
+
+  /// Returns the App's search icon color.
+  Color get searchIconColor => _theme.brightness == Brightness.dark
+      ? ThemeColors.smoothWhite
+      : ThemeColors.grey;
 }
 
 abstract class _ThemedStyle {
@@ -41,10 +48,12 @@ abstract class _ThemedStyle {
 }
 
 class _AppGradients extends _ThemedStyle {
-  final section = const LinearGradient(
+  LinearGradient get section => LinearGradient(
       begin: Alignment.topRight,
       end: Alignment.bottomLeft,
-      colors: [ThemeColors.greyShade300, ThemeColors.greyShade250]);
+      colors: theme.brightness == Brightness.dark
+          ? [ThemeColors.greyShade800, ThemeColors.greyShade850]
+          : [ThemeColors.greyShade300, ThemeColors.greyShade250]);
 
   final appBar = const LinearGradient(
       begin: Alignment.bottomCenter,
@@ -68,8 +77,8 @@ class _AppTexts extends _ThemedStyle {
       theme.textTheme.bodyText1.apply(color: ThemeColors.grey);
 
   TextStyle get myCardTitle =>
-      theme.textTheme.headline1.apply(color: ThemeColors.smoothBlack);
+      theme.textTheme.headline1.apply(color: theme.primaryColor);
 
   TextStyle get myCardSubtitle =>
-      theme.textTheme.headline2.apply(color: ThemeColors.grey);
+      theme.textTheme.headline2.apply(color: theme.primaryColor);
 }

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:ay_flutter_challenge/blocs/blocs.dart';
 import 'package:ay_flutter_challenge/blocs/state_status.dart';
 import 'package:ay_flutter_challenge/configs/app_localizations.dart';
-import 'package:ay_flutter_challenge/configs/configs.dart';
 import 'package:ay_flutter_challenge/data/models/models.dart';
 import 'package:ay_flutter_challenge/data/repositories/contact_repository.dart';
 import 'package:ay_flutter_challenge/utils/styles.dart';
@@ -29,7 +28,7 @@ class ContactSearchDelegate extends SearchDelegate<Contact> {
 
   @override
   ThemeData appBarTheme(BuildContext context) {
-    final appTheme = AppTheme.of(context);
+    final appTheme = Theme.of(context);
     return Theme.of(context).copyWith(
         primaryColor: appTheme.appBarTheme.color,
         primaryIconTheme: appTheme.primaryIconTheme,
@@ -119,7 +118,10 @@ class _ResultsListView extends StatelessWidget {
     return ListView.separated(
       separatorBuilder: (_, __) => Separator(),
       itemBuilder: (_, index) => ListTile(
-        leading: Icon(isHistory ? Icons.history : Icons.account_circle),
+        leading: Icon(
+          isHistory ? Icons.history : Icons.account_circle,
+          color: styles.searchIconColor,
+        ),
         title: Text(
           results[index].fullName,
           style: styles.texts.itemTile,
